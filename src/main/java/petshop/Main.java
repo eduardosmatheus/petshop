@@ -20,12 +20,8 @@ public class Main {
      * @return Grizzly HTTP server.
      */
     public static HttpServer startServer() {
-        // create a resource config that scans for JAX-RS resources and providers
-        // in petshop package
-        final ResourceConfig rc = new ResourceConfig().packages("petshop");
-
-        // create and start a new instance of grizzly http server
-        // exposing the Jersey application at BASE_URI
+        final ResourceConfig rc = new ResourceConfig()
+                .packages("model", "petshop", "services");
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 
