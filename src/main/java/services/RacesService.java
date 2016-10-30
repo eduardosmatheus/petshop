@@ -2,19 +2,23 @@ package services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.net.URI;
 import mocking.RaceList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import model.Race;
+import petshop.Main;
 
 @Path("/races")
 public class RacesService {
@@ -25,8 +29,21 @@ public class RacesService {
     private final CopyOnWriteArrayList<Race> races = RaceList.getInstance();
     
     private final ObjectMapper mapper = new ObjectMapper();
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response create(@QueryParam("descricao") String descricao) {
+        int nextId = races.size() + 1;
+        if(!races.add(new Race(nextId, descricao))){
+            return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+        }
+        String newRaceUrl = String.format(Main.BASE_URI+"races/%s", nextId);
+        return Response.created(URI.create(newRaceUrl)).build();
+    }
+    
+    
     @GET
-    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readAll() throws IOException {
         if(races.isEmpty()) {
@@ -48,9 +65,8 @@ public class RacesService {
                 : Response.status(Status.NOT_FOUND).build();
     }
 
-    
     @DELETE
-    @Path("{id}/delete")
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response delete(
             @PathParam("id") int id,

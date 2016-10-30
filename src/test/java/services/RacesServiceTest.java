@@ -2,6 +2,7 @@ package services;
 
 import helper.PetshopTestHelper;
 import java.util.concurrent.CopyOnWriteArrayList;
+import javax.ws.rs.client.Entity;
 import mocking.RaceList;
 import model.Race;
 import static org.testng.Assert.*;
@@ -13,13 +14,13 @@ public class RacesServiceTest extends PetshopTestHelper {
     
     @Test(priority = 1, description = "The findAll method should be invoked.")
     public void shouldFindAllRaces() {
-        String rs = target.path("races/all").request().get(String.class);
+        String rs = target.path("races").request().get(String.class);
         assertEquals(getExpectedRaces(), rs);
     }
     
     @Test(priority = 4, description = "The delete method should be invoked and remove the following object.")
     public void shouldDeleteRace() {
-        int status = target.path("races/1/delete").request().delete().getStatus();
+        int status = target.path("races/1").request().delete().getStatus();
         assertEquals(status, 200);
     }
     
@@ -33,6 +34,14 @@ public class RacesServiceTest extends PetshopTestHelper {
     public void shouldNotFindRaceById() {
         int status = target.path("races/5").request().get().getStatus();
         assertEquals(status, 500);
+    }
+    
+    @Test(priority = 5)
+    public void shouldCreateANewRace() {
+        Entity<Race> foo = Entity.json(new Race(5, "Pitbull"));
+        Race createdRace = target.path("races").request().post(foo, Race.class);
+        assertNotNull(createdRace);
+        assertEquals(createdRace.descricao, "Pitbull");
     }
     
     private String getExpectedRaces() {
