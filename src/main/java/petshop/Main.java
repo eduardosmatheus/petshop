@@ -21,7 +21,10 @@ public class Main {
      */
     public static HttpServer startServer() {
         final ResourceConfig rc = new ResourceConfig()
-                .packages("model", "petshop", "services");
+                .packages("model", 
+                        "petshop", 
+                        "mocking",
+                        "services");
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 

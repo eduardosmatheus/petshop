@@ -1,22 +1,28 @@
 package services;
 
 import helper.PetshopTestHelper;
-import java.util.stream.Collectors;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class RacesServiceTest extends PetshopTestHelper {
 
     @Test
-    public void shouldFindAllRacesByRequest() {
+    public void shouldFindAllRaces() {
         String rs = target.path("races/all").request().get(String.class);
-        Assert.assertEquals(getExpectedMessage(), rs);
+        assertEquals(getExpectedResult(), rs);
     }
     
-    private String getExpectedMessage() {
-        return RaceList.getInstance()
-                .stream()
-                .map(p -> p.toString())
-                .collect(Collectors.joining("\n"));
+    @Test
+    public void shouldUpdateRaceInfo() {
+        
+    }
+    
+    @Test
+    public void shouldFindRaceById() {
+        
+    }
+    
+    private String getExpectedResult() {
+        return "[{\"id\":1,\"descricao\":\"Chiuaua\"},{\"id\":2,\"descricao\":\"Labrador\"},{\"id\":3,\"descricao\":\"Golden Retriever\"},{\"id\":4,\"descricao\":\"Bullterrier\"}]";
     }
 }
