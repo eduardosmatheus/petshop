@@ -3,6 +3,7 @@ package services;
 import helper.PetshopTestHelper;
 import java.util.concurrent.CopyOnWriteArrayList;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Response;
 import mocking.RaceList;
 import model.Race;
 import static org.testng.Assert.*;
@@ -39,9 +40,9 @@ public class RacesServiceTest extends PetshopTestHelper {
     @Test(priority = 5)
     public void shouldCreateANewRace() {
         Entity<Race> foo = Entity.json(new Race(5, "Pitbull"));
-        Race createdRace = target.path("races").request().post(foo, Race.class);
+        Response createdRace = target.path("races").request().post(foo);
         assertNotNull(createdRace);
-        assertEquals(createdRace.descricao, "Pitbull");
+        assertEquals(createdRace.getStatus(), 201);
     }
     
     private String getExpectedRaces() {
