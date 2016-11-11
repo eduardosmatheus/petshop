@@ -1,0 +1,11 @@
+{
+  "name": "petshop",
+  "version": "1.0.0",
+  "description": "Trabalho academico para fazer gestão de um petshop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
