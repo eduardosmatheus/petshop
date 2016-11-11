@@ -2,10 +2,8 @@ package services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.net.URI;
 import mocking.RaceList;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import model.Race;
-import petshop.Main;
 
 @Path("/races")
 public class RacesService {
@@ -39,8 +36,8 @@ public class RacesService {
         if(!races.add(new Race(nextId, descricao))){
             return Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
-        URI newRaceUrl = URI.create(String.format(Main.BASE_URI+"races/%s", nextId));
-        return Response.temporaryRedirect(newRaceUrl).build();
+//        URI newRaceUrl = URI.create(String.format(Main.BASE_URI+"races/%s", nextId));
+        return Response.ok().build();
     }
     
     
@@ -58,12 +55,12 @@ public class RacesService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readById(@PathParam("id") int id) {
-        Race result = races.stream()
+        /*Race result = races.stream()
                 .filter(r -> r.id == id)
-                .collect(Collectors.toList()).get(0);
-        return result != null
+                .collect(Collectors.toList()).get(0);*/
+        return null;/* result != null
                 ? Response.ok(mapper.convertValue(result, Race.class), MediaType.APPLICATION_JSON).build()
-                : Response.status(Status.NOT_FOUND).build();
+                : Response.status(Status.NOT_FOUND).build();*/
     }
 
     @DELETE
@@ -72,10 +69,10 @@ public class RacesService {
     public Response delete(
             @PathParam("id") int id,
             @PathParam("descricao") String descricao) {
-        boolean removed = races.removeIf(r -> r.id == id);
+        /*boolean removed = races.removeIf(r -> r.id == id);
         if (removed) {
             return Response.status(Status.OK).build();
-        }
+        }*/
         return Response.status(Status.BAD_REQUEST).build();
     }
     
