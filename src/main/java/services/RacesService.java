@@ -30,7 +30,7 @@ public class RacesService implements Findable {
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public Response findById(@PathParam("id") int id) {
-        List<Race> r = RACES.stream().filter(x -> x.id == id).collect(Collectors.toList());
+        List<Race> r = RACES.stream().filter(x -> x.getId() == id).collect(Collectors.toList());
         return Response.ok(r, MediaType.APPLICATION_JSON).build();
     }
     
