@@ -1,11 +1,11 @@
 package services;
 
-import repos.Findable;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import repos.Persistible;
 
 @Path("especies")
 public class EspecieService {

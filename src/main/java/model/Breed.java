@@ -5,11 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @JsonSerialize
 @Entity
-@Table(catalog = "breeds")
 public class Breed implements Serializable {
 
     @Id @GeneratedValue
@@ -37,7 +35,7 @@ public class Breed implements Serializable {
         return name;
     }
 
-    public void setDescription(String description) {
+    public void setName(String description) {
         this.name = description;
     }
 
