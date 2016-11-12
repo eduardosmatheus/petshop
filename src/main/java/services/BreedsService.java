@@ -1,6 +1,7 @@
 package services;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -48,10 +49,18 @@ public class BreedsService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response put(Breed newRace) {
         Breed result = dao.update(newRace);
-        /*Breed remaining = breedData.findOne(newRace.getId());
-        Breed result = breedData.BREEDS.set(breedData.BREEDS.indexOf(remaining), newRace);*/
         if(result == null)
             return Response.noContent().build();
         return Response.ok(newRace).build();
+    }
+    
+    @DELETE
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response delete(Breed r) {
+        if(dao.delete(r))
+            return Response.ok(String.format("Breed %s deleted successfully!", r.getName())).build();
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 }

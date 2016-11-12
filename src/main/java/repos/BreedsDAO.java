@@ -14,8 +14,6 @@ public class BreedsDAO implements Persistible<Breed> {
     @Override
     public Breed findOne(int id) {
         Breed b = em.find(Breed.class, id);
-        if(b == null)
-            throw new RuntimeException("Breed not found!");
         return b;
     }
 
@@ -38,7 +36,8 @@ public class BreedsDAO implements Persistible<Breed> {
     public boolean delete(Breed breed) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        em.remove(breed);
+        Object e = em.merge(breed);
+        em.remove(e);
         transaction.commit();
         return findOne(breed.getId()) == null;
     }
