@@ -1,8 +1,6 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import views.Views;
 
 @JsonSerialize
 public class Animal {

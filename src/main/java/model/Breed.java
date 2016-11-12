@@ -1,10 +1,18 @@
 package model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @JsonSerialize
-public class Breed {
+@Entity
+@Table(catalog = "breeds")
+public class Breed implements Serializable {
 
+    @Id @GeneratedValue
     private int id;
     private String name;
 
