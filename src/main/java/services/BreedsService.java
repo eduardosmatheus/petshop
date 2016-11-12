@@ -21,7 +21,11 @@ public class BreedsService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
-        return Response.ok(dao.all(), MediaType.APPLICATION_JSON).build();
+        return Response.ok(dao.all(), MediaType.APPLICATION_JSON)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+                .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
+                .build();
     }
     
     @GET

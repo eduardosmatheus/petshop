@@ -3,14 +3,14 @@ import axios from 'axios'
 export const FETCH_BREEDS = 'FETCH_BREEDS'
 export const ERROR = 'ERROR'
 
-const ROOT_URL = 'http://192.168.0.95/PetshopWebApi'
+const ROOT_URL = 'http://localhost:8080/PetshopWebApi'
 
 export function fetchBreeds() {
   return dispatch => {
-    axios.get(`${ROOT_URL}/breeds`).then(data => {
+    axios.get(`${ROOT_URL}/breeds`).then(response => {
       dispatch({
         type : FETCH_BREEDS,
-        payload : data
+        payload : response.data
       })
     }).catch(err => {
       dispatch({
@@ -18,5 +18,5 @@ export function fetchBreeds() {
         error : err
       })
     })
-  } 
+  }
 }
