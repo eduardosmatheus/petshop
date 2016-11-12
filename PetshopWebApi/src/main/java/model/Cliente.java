@@ -1,20 +1,14 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize
 public class Cliente {
     
-    @JsonView
     private final String cpf;
-    @JsonView
     private final String name;
-    @JsonView
     private final long age;
-    @JsonView
     private final String address;
-    @JsonView
     private final String phone;
 
     public Cliente(String cpf, String name, long age, String address, String phone) {
@@ -35,14 +29,13 @@ public class Cliente {
 
     public long getAge() {
         return age;
-    }
+    }    
 
-    public String getEndereco() {
+    public String getAddress() {
         return address;
     }
 
-    public String getTelefone() {
+    public String getPhone() {
         return phone;
     }
-    
 }

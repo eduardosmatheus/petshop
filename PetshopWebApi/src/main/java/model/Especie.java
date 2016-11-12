@@ -5,9 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize
 public class Especie {
-    @JsonView
+    
     private final int id;
-    @JsonView
     private final String description;
 
     public Especie(int id, String description) {

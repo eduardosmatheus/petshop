@@ -7,16 +7,11 @@ import views.Views;
 @JsonSerialize
 public class Animal {
     
-    @JsonView(Views.Normal.class)
-    public final int id;
-    @JsonView(Views.Normal.class)
-    public final String name;
-    @JsonView(Views.Normal.class)
-    public final Cliente client;
-    @JsonView(Views.Normal.class)
-    public final Race race;
-    @JsonView(Views.Normal.class)
-    public final Especie especie;
+    private final int id;
+    private final String name;
+    private final Cliente client;
+    private final Race race;
+    private final Especie especie;
 
     public Animal(int id, String name, Cliente client, Race race, Especie especie) {
         this.id = id;
@@ -34,7 +29,7 @@ public class Animal {
         return name;
     }
 
-    public Cliente getCliente() {
+    public Cliente getClient() {
         return client;
     }
 

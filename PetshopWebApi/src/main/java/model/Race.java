@@ -1,35 +1,29 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import views.Views;
 
 @JsonSerialize
 public class Race {
 
-    @JsonView(Views.Normal.class)
     public int id;
-    @JsonView(Views.Normal.class)
-    public String descricao;
+    public String description;
 
-    public Race(){}
-    
     public Race(int id, String descricao) {
         this.id = id;
-        this.descricao = descricao;
+        this.description = descricao;
     }
 
     @Override
     public String toString() {
-        return String.format("Codigo: %s\tDescricao: %s", id, descricao);
+        return String.format("Codigo: %s\tDescricao: %s", id, description);
     }
 
     public int getId() {
         return id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
     public void setId(int id) {
@@ -37,6 +31,6 @@ public class Race {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.description = descricao;
     }
 }
