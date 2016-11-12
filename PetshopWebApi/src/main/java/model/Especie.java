@@ -2,14 +2,12 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import parserview.Views;
 
 @JsonSerialize
 public class Especie {
-
-    @JsonView(Views.Normal.class)
+    @JsonView
     private final int id;
-    @JsonView(Views.Normal.class)
+    @JsonView
     private final String description;
 
     public Especie(int id, String description) {

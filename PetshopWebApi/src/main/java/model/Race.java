@@ -2,17 +2,18 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import parserview.Views;
+import views.Views;
 
 @JsonSerialize
 public class Race {
 
     @JsonView(Views.Normal.class)
-    public final int id;
-    
+    public int id;
     @JsonView(Views.Normal.class)
-    public final String descricao;
+    public String descricao;
 
+    public Race(){}
+    
     public Race(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
@@ -29,5 +30,13 @@ public class Race {
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
