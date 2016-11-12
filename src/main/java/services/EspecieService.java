@@ -5,7 +5,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import repos.Persistible;
 
 @Path("especies")
 public class EspecieService {
@@ -15,7 +14,8 @@ public class EspecieService {
     public Response findOne(@PathParam("id") int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
     public Response findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

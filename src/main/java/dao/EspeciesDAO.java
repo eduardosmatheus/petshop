@@ -1,30 +1,30 @@
-package repos;
+package dao;
 
 import db.JpaUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
-import model.Breed;
+import model.Especie;
 
-public class BreedsDAO implements Persistible<Breed> {
+public class EspeciesDAO implements Persistible<Especie> {
 
     private EntityManager em = JpaUtil.getInstance().getEntityManager();
             
     @Override
-    public Breed findOne(int id) {
-        Breed b = em.find(Breed.class, id);
+    public Especie findOne(int id) {
+        Especie b = em.find(Especie.class, id);
         return b;
     }
 
     @Override
-    public List<Breed> all() {
-        TypedQuery<Breed> q = em.createQuery("from Breed", Breed.class);
+    public List<Especie> all() {
+        TypedQuery<Especie> q = em.createQuery("from Especie", Especie.class);
         return q.getResultList();
     }
     
     @Override
-    public Breed update(Breed f) {
+    public Especie update(Especie f) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.merge(f);
@@ -33,7 +33,7 @@ public class BreedsDAO implements Persistible<Breed> {
     }
 
     @Override
-    public boolean delete(Breed breed) {
+    public boolean delete(Especie breed) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         Object e = em.merge(breed);
@@ -43,7 +43,7 @@ public class BreedsDAO implements Persistible<Breed> {
     }
 
     @Override
-    public boolean create(Breed breed) {
+    public boolean create(Especie breed) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(breed);
