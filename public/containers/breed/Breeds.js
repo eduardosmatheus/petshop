@@ -3,18 +3,23 @@ import { connect } from 'react-redux'
 import { fetchBreeds } from '../../actions'
 
 class Breeds extends Component {
+
   componentWillMount() {
     this.props.fetchBreeds()
   }
 
   renderBreeds() {
-    let {all} = this.props.breeds
-    return all.map((breed) => {
-      return (<tr key={breed.id}><td>{breed.id}</td><td>{breed.name}</td></tr>)
+    return this.props.breeds.all.map((breed) => {
+      return (
+        <tr key={breed.id}>
+          <td>{breed.id}</td>
+          <td>{breed.name}</td>
+        </tr>)
     })
   }
 
-  render() { 
+  render() {
+
     return (
       <table className="table table-striped table-hover ">
         <thead>
