@@ -1,4 +1,4 @@
-package com.topjavatutorial;
+package services;
 
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -29,7 +29,11 @@ public class AnimalsService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") int id) {
-        Optional<Animal> res = ANIMALS.stream().filter(i -> i.getId() == id).findFirst();
-        return Response.ok(res.get(), MediaType.APPLICATION_JSON).build();
+        Optional<Animal> res = ANIMALS
+                .stream()
+                .filter(i -> i.getId() == id).findAny();
+        return Response.ok(res.orElse(new Animal()), MediaType.APPLICATION_JSON).build();
     }
+    
+    
 }

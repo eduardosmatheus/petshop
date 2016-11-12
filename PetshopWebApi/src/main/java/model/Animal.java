@@ -2,29 +2,26 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import java.io.Serializable;
 import views.Views;
 
 @JsonSerialize
-public class Animal implements Serializable {
+public class Animal {
     
     @JsonView(Views.Normal.class)
-    public int id;
+    public final int id;
     @JsonView(Views.Normal.class)
-    public String name;
+    public final String name;
     @JsonView(Views.Normal.class)
-    public Cliente cliente;
+    public final Cliente client;
     @JsonView(Views.Normal.class)
-    public Race race;
+    public final Race race;
     @JsonView(Views.Normal.class)
-    public Especie especie;
+    public final Especie especie;
 
-    public Animal() {}
-
-    public Animal(int id, String name, Cliente cliente, Race race, Especie especie) {
+    public Animal(int id, String name, Cliente client, Race race, Especie especie) {
         this.id = id;
         this.name = name;
-        this.cliente = cliente;
+        this.client = client;
         this.race = race;
         this.especie = especie;
     }
@@ -33,41 +30,19 @@ public class Animal implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+        return client;
     }
 
     public Race getRace() {
         return race;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
-    }
-
     public Especie getEspecie() {
         return especie;
     }
-
-    public void setEspecie(Especie especie) {
-        this.especie = especie;
-    }
-    
-    
 }

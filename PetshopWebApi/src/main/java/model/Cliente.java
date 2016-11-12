@@ -7,22 +7,20 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class Cliente {
     
     @JsonView
-    public String cpf;
+    private final String cpf;
     @JsonView
-    public String nome;
+    private final String name;
     @JsonView
-    public long idade;
+    private final long age;
     @JsonView
-    public String address;
+    private final String address;
     @JsonView
-    public String phone;
+    private final String phone;
 
-    public Cliente() { }
-
-    public Cliente(String cpf, String nome, long idade, String address, String phone) {
+    public Cliente(String cpf, String name, long age, String address, String phone) {
         this.cpf = cpf;
-        this.nome = nome;
-        this.idade = idade;
+        this.name = name;
+        this.age = age;
         this.address = address;
         this.phone = phone;
     }
@@ -31,40 +29,20 @@ public class Cliente {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public String getName() {
+        return name;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public long getIdade() {
-        return idade;
-    }
-
-    public void setIdade(long idade) {
-        this.idade = idade;
+    public long getAge() {
+        return age;
     }
 
     public String getEndereco() {
         return address;
     }
 
-    public void setEndereco(String endereco) {
-        this.address = endereco;
-    }
-
     public String getTelefone() {
         return phone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.phone = telefone;
     }
     
 }
