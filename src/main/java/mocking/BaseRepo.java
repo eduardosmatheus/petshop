@@ -4,7 +4,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import model.Animal;
 import model.Cliente;
 import model.Especie;
-import model.Race;
+import model.Breed;
 
 public class BaseRepo {
 
@@ -16,12 +16,12 @@ public class BaseRepo {
         ESPECIES.add(new Especie(4, "Canis Lupus Familiaris"));
     }
     
-    private static final CopyOnWriteArrayList<Race> RACES = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<Breed> RACES = new CopyOnWriteArrayList<>();
     static {
-        RACES.add(new Race(1, "Chiuaua"));
-        RACES.add(new Race(2, "Labrador"));
-        RACES.add(new Race(3, "Golden Retriever"));
-        RACES.add(new Race(4, "Bullterrier"));
+        RACES.add(new Breed(1, "Chiuaua"));
+        RACES.add(new Breed(2, "Labrador"));
+        RACES.add(new Breed(3, "Golden Retriever"));
+        RACES.add(new Breed(4, "Bullterrier"));
     }
     
     private static final CopyOnWriteArrayList<Cliente> CLIENTES = new CopyOnWriteArrayList<>();
@@ -49,7 +49,7 @@ public class BaseRepo {
     }
     
 
-    public static CopyOnWriteArrayList<Race> getRaces() {
+    public static CopyOnWriteArrayList<Breed> getRaces() {
         return RACES;
     }
 }

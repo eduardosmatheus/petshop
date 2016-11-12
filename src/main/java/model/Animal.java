@@ -10,10 +10,10 @@ public class Animal {
     private final int id;
     private final String name;
     private final Cliente client;
-    private final Race race;
+    private final Breed race;
     private final Especie especie;
 
-    public Animal(int id, String name, Cliente client, Race race, Especie especie) {
+    public Animal(int id, String name, Cliente client, Breed race, Especie especie) {
         this.id = id;
         this.name = name;
         this.client = client;
@@ -33,7 +33,7 @@ public class Animal {
         return client;
     }
 
-    public Race getRace() {
+    public Breed getRace() {
         return race;
     }
 
