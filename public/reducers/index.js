@@ -1,7 +1,10 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
+import BreedsReducer from './reducerBreed'
+import ChangeStateReducer from './reducerChangeState'
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
-});
+  breeds : BreedsReducer,
+  changeState : ChangeStateReducer
+})
 
-export default rootReducer;
+export default rootReducer

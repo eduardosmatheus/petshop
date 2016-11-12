@@ -9,7 +9,7 @@ public class Race {
 
     @JsonView(Views.Normal.class)
     public final int id;
-    
+
     @JsonView(Views.Normal.class)
     public final String descricao;
 
