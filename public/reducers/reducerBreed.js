@@ -1,9 +1,13 @@
-export default function() {
-  return [
-    {id : 1, name : "Beagle"},
-    {id : 2, name : "Doberman"},
-    {id : 3, name : "Pastor Alemão"},
-    {id : 4, name : "Pintcher"},
-    {id : 5, name : "Schnauzer"}
-  ]
+import { FETCH_BREEDS } from '../actions'
+
+const INITIAL_STATE = { all : [], actual : null}
+
+export default function(state = INITIAL_STATE, action) { 
+  switch (action.type) {
+    case FETCH_BREEDS:
+      return {...state, all : action.payload.data }
+      break
+  }
+
+  return state;
 }

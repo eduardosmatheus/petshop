@@ -6,11 +6,10 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.props);
+    let {children} = this.props
     return (
       <div className="boards">
-      Teste
-        {this.props.children}
+        {children}
       </div>
     );
   }

@@ -1,0 +1,9 @@
+{
+  "presets": ["react", "stage-0", "stage-1", "es2015"],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    }
+  },
+  "plugins": ["transform-decorators-legacy"]
+}

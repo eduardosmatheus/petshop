@@ -4,7 +4,10 @@
 }
 
 .menuItem {
+  margin: 0 auto;
   cursor: pointer;
+  font-size: 40;
+  float : left;
 }
 
 .boards {
