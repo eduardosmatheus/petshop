@@ -6,8 +6,19 @@ import javax.persistence.Persistence;
 
 public class JpaUtil {
 
-    public static EntityManager getEntityManager() {
-        final EntityManagerFactory emf = Persistence.createEntityManagerFactory("petshop");
+    private final EntityManagerFactory emf;
+    private static JpaUtil self;
+
+    public JpaUtil() {
+        this.emf = Persistence.createEntityManagerFactory("petshop");
+    }
+    public static synchronized JpaUtil getInstance() {
+        if(self == null)
+            return new JpaUtil();
+        return self;
+    }
+    
+    public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 }

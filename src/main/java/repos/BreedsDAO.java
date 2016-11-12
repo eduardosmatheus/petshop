@@ -1,37 +1,37 @@
 package repos;
 
+import db.JpaUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import model.Breed;
 
 public class BreedsDAO implements Persistible<Breed> {
 
-    @PersistenceContext
-    EntityManager em;
-
+    private EntityManager em = JpaUtil.getInstance().getEntityManager();
+            
     @Override
     public Breed findOne(int id) {
-        return em.find(Breed.class, id);
+        Breed b = em.find(Breed.class, id);
+        if(b == null)
+            throw new RuntimeException("Breed not found!");
+        return b;
     }
 
     @Override
     public List<Breed> all() {
-        Query q = em.createQuery("select a from Breed a");
+        TypedQuery<Breed> q = em.createQuery("from Breed", Breed.class);
         return q.getResultList();
     }
     
     @Override
     public Breed update(Breed f) {
-        Breed existente = findOne(f.getId());
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        existente.setName(f.getName());
-        em.persist(existente);
+        em.merge(f);
         transaction.commit();
-        return existente;
+        return f;
     }
 
     @Override
@@ -44,12 +44,12 @@ public class BreedsDAO implements Persistible<Breed> {
     }
 
     @Override
-    public Breed create(Breed breed) {
+    public boolean create(Breed breed) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(breed);
         transaction.commit();
-        return findOne(breed.getId());
+        return findOne(breed.getId()) != null;
     }
 
 }

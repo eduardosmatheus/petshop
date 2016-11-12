@@ -32,12 +32,13 @@ public class BreedsService {
     }
     
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(Breed race) {
-        Breed added = dao.create(race);
-        if(added != null)
-            return Response.status(Response.Status.CREATED).entity(added).build();
+    public Response create(String raceName) {
+        Breed f = new Breed();
+        f.setName(raceName);
+        if(dao.create(f))
+            return Response.status(Response.Status.CREATED).entity(f).build();
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
     
