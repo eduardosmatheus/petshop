@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "axios": "^0.15.2",
+    "bootstrap": "^3.3.7",
     "bulma": "^0.2.3",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",

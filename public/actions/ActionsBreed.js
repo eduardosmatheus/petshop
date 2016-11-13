@@ -14,7 +14,7 @@ export function fetchBreeds() {
   }
 }
 
-export function createBreed(props) { 
+export function createBreed(props) {
   return dispatch => {
     axios.post(`${ROOT_URL}/${BREEDS_URL}`, props.name, { headers : {'Content-Type' : 'text/plain'} }).then( response => {
       dispatch({

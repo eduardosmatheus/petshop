@@ -12,6 +12,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
+app.use('/styles/bootstrap/', express.static(__dirname + '/node_modules/bootstrap/dist/css/'));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));

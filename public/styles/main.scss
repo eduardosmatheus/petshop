@@ -1,10 +1,59 @@
+body {
+  background: #FFFAFA;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5;
+  padding: 2em 1em;
+  color: #566b78;
+}
+
+h1 {
+  margin-top: 1em;
+}
+
+h1, h2, strong {
+  color: #333;
+}
+
 .app-container {
     margin: 0 auto;
-    margin-top: 50px;
+}
+
+.boards {
+  text-align: center;
+}
+
+#menuApp {
+
+  margin: 0 auto;
+
+  :hover {
+    text-decoration: none;
+    color: rgba(0,0,0, 0.8)
+  }
 }
 
 .menuItem {
+  margin: 1.5%;
   cursor: pointer;
+  padding: 50px;
+  float: left;
+  text-align: center;
+  min-width: 30%;
+  color: #000;
+
+  :hover {
+    text-decoration: none;
+    color: rgba(0,0,0, 0.1)
+  }
+
+  .fa {
+    margin: 0 auto;
+  }
+
+  .menuDescription {
+    font-size: xx-large;
+  }
+
 }
 
 .boards {

@@ -21,15 +21,13 @@ class BreedForm extends Component {
             {name.touched ? name.error : ''}
           </div>
         </div>
-        <button type="submit" >
+        <button type="submit" className="btn btn-primary">
           Gravar
         </button>
       </form>
     )
   }
 }
-
-
 
 export default reduxForm({
   form : 'BreedForm',
