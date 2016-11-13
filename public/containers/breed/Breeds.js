@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchBreeds } from '../../actions'
+import { fetchBreeds, postBreed } from '../../actions'
 
 class Breeds extends Component {
 
@@ -11,7 +11,7 @@ class Breeds extends Component {
   renderBreeds() {
     return this.props.breeds.all.map((breed) => {
       return (
-        <tr key={breed.id}>
+        <tr key={breed.id} onClick={() => { this.props.postBreed("HotDog") }}>
           <td>{breed.id}</td>
           <td>{breed.name}</td>
         </tr>)
@@ -40,4 +40,4 @@ function mapStateToProps(state) {
   return { breeds : state.breedState }
 }
 
-export default connect(mapStateToProps, { fetchBreeds })(Breeds)
+export default connect(mapStateToProps, { fetchBreeds, postBreed })(Breeds)

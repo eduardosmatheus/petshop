@@ -33,7 +33,11 @@ public class BreedsService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") int id) {
         Breed r = dao.findOne(id);
-        return Response.ok(r, MediaType.APPLICATION_JSON).build();
+        return Response.ok(r, MediaType.APPLICATION_JSON)
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+            .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
+            .build();
     }
     
     @POST
@@ -43,8 +47,16 @@ public class BreedsService {
         Breed f = new Breed();
         f.setName(raceName);
         if(dao.create(f))
-            return Response.status(Response.Status.CREATED).entity(f).build();
-        return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.CREATED)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+                .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
+                .entity(f).build();
+        return Response.status(Response.Status.BAD_REQUEST)
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+            .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
+            .build();
     }
     
     @PUT
@@ -54,8 +66,16 @@ public class BreedsService {
     public Response put(Breed newRace) {
         Breed result = dao.update(newRace);
         if(result == null)
-            return Response.noContent().build();
-        return Response.ok(newRace).build();
+            return Response.noContent()
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+                .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
+                .build();
+        return Response.ok(newRace)
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+            .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
+            .build();
     }
     
     @DELETE
@@ -64,7 +84,15 @@ public class BreedsService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response delete(Breed r) {
         if(dao.delete(r))
-            return Response.ok(String.format("Breed %s deleted successfully!", r.getName())).build();
-        return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.ok(String.format("Breed %s deleted successfully!", r.getName()))
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+                .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
+                .build();
+        return Response.status(Response.Status.NOT_FOUND)
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+            .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
+            .build();
     }
 }
