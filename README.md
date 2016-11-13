@@ -10,8 +10,7 @@ We have to create a solution for petshops that are saving their annotations in n
 
 - Java 8 (:heart:)
 - Jersey (An Java API to create RESTful WebServices)
-- JUnit (Automated tests)
-- TO DO: React.js (A JavaScript library to build user interfaces)
+- React.js (A JavaScript library to build user interfaces)
 
 #Instructions
 
@@ -19,12 +18,6 @@ We have to create a solution for petshops that are saving their annotations in n
 
 ```bash
    mvn install
-```
-
-- Starting the server
-
-```bash
-   mvn exec:java
 ```
 
 - Running tests
