@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import BreedsReducer from './reducerBreed'
+import BreedsReducer from './ReducerBreed'
 import { reducer as formReducer } from 'redux-form'
 
 const rootReducer = combineReducers({

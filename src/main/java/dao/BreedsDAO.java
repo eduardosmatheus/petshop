@@ -2,6 +2,8 @@ package dao;
 
 import db.JpaUtil;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
@@ -20,7 +22,9 @@ public class BreedsDAO implements Persistible<Breed> {
     @Override
     public List<Breed> all() {
         TypedQuery<Breed> q = em.createQuery("from Breed", Breed.class);
-        return q.getResultList();
+        return q.getResultList()
+            .stream() 
+            .collect(Collectors.toList());
     }
     
     @Override
