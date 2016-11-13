@@ -15,8 +15,7 @@ export default function(state = INITIAL_STATE, action) {
       return {...state, all : action.payload }
       break
     case CREATE_BREED:
-      let {all, actual} = state;
-      console.log(actual);
+      let {all, actual} = state; 
       all.push(action.payload);
       return {...state, all : all}
       break

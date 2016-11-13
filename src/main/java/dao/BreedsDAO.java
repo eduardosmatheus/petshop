@@ -23,7 +23,7 @@ public class BreedsDAO implements Persistible<Breed> {
     public List<Breed> all() {
         TypedQuery<Breed> q = em.createQuery("from Breed", Breed.class);
         return q.getResultList()
-            .stream() 
+            .stream()   
             .collect(Collectors.toList());
     }
     
