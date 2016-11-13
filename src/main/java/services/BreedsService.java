@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Breed;
 import dao.BreedsDAO;
+import javax.ws.rs.core.Response.Status;
 
 @Path("breeds")
 public class BreedsService {
@@ -22,6 +23,7 @@ public class BreedsService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         return Response.ok(dao.all(), MediaType.APPLICATION_JSON)
+                //TO DO: Deve ter uma forma de padronizar isso pra toda response. (Problema com o CORS)
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
                 .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
@@ -33,18 +35,24 @@ public class BreedsService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") int id) {
         Breed r = dao.findOne(id);
-        return Response.ok(r, MediaType.APPLICATION_JSON).build();
+        if(r != null)
+            return Response.ok(r, MediaType.APPLICATION_JSON)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+                    .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
+                    .build();
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
     
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(String raceName) {
-        Breed f = new Breed();
-        f.setName(raceName);
-        if(dao.create(f))
-            return Response.status(Response.Status.CREATED).entity(f).build();
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        Breed breed = new Breed();
+        breed.setName(raceName);
+        if(dao.create(breed))
+            return Response.status(Response.Status.CREATED).entity(breed).build();
+        return Response.status(Status.BAD_REQUEST).build();
     }
     
     @PUT
@@ -54,7 +62,7 @@ public class BreedsService {
     public Response put(Breed newRace) {
         Breed result = dao.update(newRace);
         if(result == null)
-            return Response.noContent().build();
+            return Response.status(Status.NOT_ACCEPTABLE).build();
         return Response.ok(newRace).build();
     }
     

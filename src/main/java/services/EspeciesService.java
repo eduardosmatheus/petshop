@@ -1,23 +1,61 @@
 package services;
 
+import dao.EspeciesDAO;
+import java.util.List;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import model.Especie;
 
 @Path("especies")
-public class EspecieService {
+public class EspeciesService {
 
+    private final EspeciesDAO dao = new EspeciesDAO();
+    
+    @GET
     @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findOne(@PathParam("id") int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Response findOne(Especie e) {
+        Especie especie = dao.findOne(e.getId());
+        if(especie == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.ok(especie).build();
     }
     
-    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Especie> especies = dao.all();
+        if(especies.isEmpty())
+            return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.ok(especies).build();
     }
-
+   
+    @POST
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response create(String especieDescription) {
+        Especie e = new Especie();
+        e.setDescription(especieDescription);
+        boolean created = dao.create(e);
+        if(created)
+            return Response.status(Response.Status.CREATED).entity(e).build();
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(Especie existing) {
+        Especie updated = dao.update(existing);
+        if(updated != null)
+            return Response.ok(updated).build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
 }
