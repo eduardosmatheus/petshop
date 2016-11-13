@@ -24,7 +24,7 @@ module.exports = {
       {
         test: /\.js?/,
         exclude: [/node_modules/, /styles/],
-        loaders: ['babel'],
+        loaders: ['babel?presets[]=react,presets[]=es2015,presets[]=stage-0'], 
         include: path.join(__dirname, 'public')
       },
       {
