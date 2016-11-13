@@ -14,11 +14,11 @@ public class JpaUtil {
     }
     public static synchronized JpaUtil getInstance() {
         if(self == null)
-            return new JpaUtil();
+            self = new JpaUtil();
         return self;
     }
     
-    public EntityManager getEntityManager() {
+    public synchronized EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 }
