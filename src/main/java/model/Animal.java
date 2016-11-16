@@ -9,17 +9,17 @@ public class Animal implements Serializable {
 //    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private Cliente client;
+    private Customer customer;
     private Breed race;
     private Especie especie;
 
     public Animal() {
     }
 
-    public Animal(int id, String name, Cliente client, Breed race, Especie especie) {
+    public Animal(int id, String name, Customer customer, Breed race, Especie especie) {
         this.id = id;
         this.name = name;
-        this.client = client;
+        this.customer = customer;
         this.race = race;
         this.especie = especie;
     }
@@ -32,8 +32,8 @@ public class Animal implements Serializable {
         return name;
     }
 
-    public Cliente getClient() {
-        return client;
+    public Customer getClient() {
+        return customer;
     }
 
     public Breed getRace() {
@@ -52,8 +52,8 @@ public class Animal implements Serializable {
         this.name = name;
     }
 
-    public void setClient(Cliente client) {
-        this.client = client;
+    public void setClient(Customer client) {
+        this.customer = client;
     }
 
     public void setRace(Breed race) {

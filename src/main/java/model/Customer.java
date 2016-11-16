@@ -3,7 +3,7 @@ package model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize
-public class Cliente {
+public class Customer {
     
     private final String cpf;
     private final String name;
@@ -11,7 +11,7 @@ public class Cliente {
     private final String address;
     private final String phone;
 
-    public Cliente(String cpf, String name, long age, String address, String phone) {
+    public Customer(String cpf, String name, long age, String address, String phone) {
         this.cpf = cpf;
         this.name = name;
         this.age = age;

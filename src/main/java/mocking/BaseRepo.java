@@ -2,7 +2,7 @@ package mocking;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 import model.Animal;
-import model.Cliente;
+import model.Customer;
 import model.Especie;
 import model.Breed;
 
@@ -24,12 +24,12 @@ public class BaseRepo {
         RACES.add(new Breed(4, "Bullterrier"));
     }
     
-    private static final CopyOnWriteArrayList<Cliente> CLIENTES = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<Customer> CLIENTES = new CopyOnWriteArrayList<>();
     static {
-        CLIENTES.add(new Cliente("07650290905", "Matheus Eduardo", 19l, "Foo Foo", "9944-0095"));
-        CLIENTES.add(new Cliente("12345678911", "Lucas Kruger", 19l, "Foo Bar", "6969-2424"));
-        CLIENTES.add(new Cliente("45678912300", "Osnilda Sieves", 49l, "Foo", "6666-6666"));
-        CLIENTES.add(new Cliente("78945632147", "Márcio Eduardo", 45l, "FooBar", "4002-8922"));
+        CLIENTES.add(new Customer("07650290905", "Matheus Eduardo", 19l, "Foo Foo", "9944-0095"));
+        CLIENTES.add(new Customer("12345678911", "Lucas Kruger", 19l, "Foo Bar", "6969-2424"));
+        CLIENTES.add(new Customer("45678912300", "Osnilda Sieves", 49l, "Foo", "6666-6666"));
+        CLIENTES.add(new Customer("78945632147", "Márcio Eduardo", 45l, "FooBar", "4002-8922"));
     }
     
     private static final CopyOnWriteArrayList<Animal> ANIMALS = new CopyOnWriteArrayList<>();

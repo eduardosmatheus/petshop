@@ -41,7 +41,6 @@ class Breeds extends Component {
 
     return (
       <div>
-
         <table className="table table-striped table-hover ">
           <thead>
             <tr>

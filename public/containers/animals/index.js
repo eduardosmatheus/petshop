@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { fetchPets } from '../../actions/ActionsBreed'
+// import { fetchPets } from '../../actions/ActionsAnimals'
 import { Link } from 'react-router'
 
 class Breeds extends Component {
@@ -11,10 +11,21 @@ class Breeds extends Component {
   render() {
     if(this.props.children)
       return (<div>{ this.props.children }</div>)
-      
+
     return (
       <div>
-       Hello world
+        <table className="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody> 
+          </tbody>
+        </table>
       </div>
     );
   }
