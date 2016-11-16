@@ -7,7 +7,7 @@ module.exports = {
     './public/index'
   ],
   output: {
-    path: './target/classes/public/extc',
+    path: './',
     filename: 'bundle.js'
   },
   plugins: [

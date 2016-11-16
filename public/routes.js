@@ -11,8 +11,10 @@ import BreedForm from './containers/breed/BreedForm'
 export default (
   <Route path='/' component={App} >
     <IndexRoute component={MenuApp} />
-    <Route path='breedsnew' component={BreedForm}/>
-    <Route path='breeds' component={Breeds}/>
+    <Route path='breeds' component={Breeds}>
+      <Route path='new' component={BreedForm}/>
+      <Route path='edit/:id' component={BreedForm}/>
+    </Route>
     <Route path="*" component={NotFound}/>
   </Route>
 )

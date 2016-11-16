@@ -7,7 +7,8 @@ import { Link } from 'react-router'
 class Breeds extends Component {
 
   componentWillMount() {
-    this.props.fetchBreeds()
+    if(!this.props.children)
+      this.props.fetchBreeds()
   }
 
   renderBreeds() {
@@ -17,7 +18,7 @@ class Breeds extends Component {
           <td>{breed.id}</td>
           <td>{breed.name}</td>
           <td>
-            <Link to="/breedsnew" params={{breedId : breed.id}}>
+            <Link to={`/breeds/edit/${breed.id}`}>
               <button className="btn btn-warning">
               Editar
               </button>
@@ -25,10 +26,14 @@ class Breeds extends Component {
           </td>
         </tr>)
     })
-  }
+  } 
 
   render() {
-    let { actual, children } = this.props.breeds
+    let { actual } = this.props.breeds
+
+    if(this.props.children)
+      return (<div>{ this.props.children }</div>)
+
     return (
       <div>
 
