@@ -7,7 +7,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Especie;
@@ -15,14 +17,15 @@ import model.Especie;
 @Path("especies")
 public class EspeciesService {
 
-    private final EspeciesDAO dao = new EspeciesDAO();
+    @Context
+    private EspeciesDAO dao;
     
     @GET
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findOne(Especie e) {
-        Especie especie = dao.findOne(e.getId());
+    public Response findOne(@PathParam("id") int id) {
+        Especie especie = dao.findOne(id);
         if(especie == null)
             return Response.status(Response.Status.NOT_FOUND).build();
         return Response.ok(especie).build();
@@ -56,6 +59,6 @@ public class EspeciesService {
         Especie updated = dao.update(existing);
         if(updated != null)
             return Response.ok(updated).build();
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.status(Response.Status.NOT_ACCEPTABLE).build();
     }
 }

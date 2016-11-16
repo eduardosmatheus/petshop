@@ -12,17 +12,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Breed;
 import dao.BreedsDAO;
-import javax.ws.rs.core.Response.Status;
+import java.util.List;
 
 @Path("breeds")
 public class BreedsService {
     
-    private final BreedsDAO dao = new BreedsDAO();
+    private BreedsDAO dao = new BreedsDAO();
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
-        return Response.ok(dao.all(), MediaType.APPLICATION_JSON)
+        List<Breed> breeds = dao.all();
+        if(breeds.isEmpty())
+            return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.ok(breeds, MediaType.APPLICATION_JSON)
                 //TO DO: Deve ter uma forma de padronizar isso pra toda response. (Problema com o CORS)
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
