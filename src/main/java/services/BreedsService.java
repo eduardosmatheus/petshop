@@ -75,6 +75,7 @@ public class BreedsService {
                 .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
                 .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
                 .build();
+        
         return Response.ok(newRace)
             .header("Access-Control-Allow-Origin", "*")
             .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")

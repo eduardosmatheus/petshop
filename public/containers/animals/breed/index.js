@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchBreeds, createBreed } from '../../actions/ActionsBreed'
+import { fetchBreeds, deleteBreed } from '../../../actions/ActionsBreed'
 import BreedForm from './BreedForm'
 import { Link } from 'react-router'
 
@@ -24,9 +24,14 @@ class Breeds extends Component {
               </button>
             </Link>
           </td>
+          <td>
+            <button className="btn btn-danger" onClick={() => {this.props.deleteBreed(breed.id)} }>
+            Excluir
+            </button>
+          </td>
         </tr>)
     })
-  } 
+  }
 
   render() {
     let { actual } = this.props.breeds
@@ -44,7 +49,6 @@ class Breeds extends Component {
               <th>Nome</th>
               <th></th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -60,4 +64,4 @@ function mapStateToProps(state) {
   return { breeds : state.breedState }
 }
 
-export default connect(mapStateToProps, { fetchBreeds })(Breeds)
+export default connect(mapStateToProps, { fetchBreeds, deleteBreed })(Breeds)

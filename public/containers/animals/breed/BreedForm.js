@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { reduxForm, change as changeFieldValue } from 'redux-form'
-import { createBreed, getBreed } from '../../actions/ActionsBreed'
+import { createBreed, getBreed, updateBreed } from '../../../actions/ActionsBreed'
 import  breedValidate from './BreedValidation'
 
 
@@ -9,16 +9,20 @@ class BreedForm extends Component {
   componentWillMount() {
     let { id } = this.props.params
     if(id)
-      this.props.getBreed(id);
+      this.props.getBreed(id)
+
 
   }
 
   render() {
+    let idParam = this.props.params.id
     let { fields : { id, name }, handleSubmit, breeds, values } = this.props
     let { actual } = breeds
 
+    let action = !idParam ? this.props.createBreed : this.props.updateBreed;
+
     return (
-      <form onSubmit={ handleSubmit(this.props.createBreed) }>
+      <form onSubmit={ handleSubmit(action) }>
         <h3>Raça: </h3>
         <div className="form-group">
           <label>Id</label>
@@ -50,4 +54,4 @@ export default reduxForm({
   form : 'BreedForm',
   fields : ['id', 'name'],
   validate : breedValidate
-}, mapStateToProps, { createBreed, getBreed, changeFieldValue })(BreedForm)
+}, mapStateToProps, { createBreed, updateBreed, getBreed, changeFieldValue })(BreedForm)

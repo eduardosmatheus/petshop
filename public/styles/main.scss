@@ -28,20 +28,21 @@ h1, h2, strong {
 
   :hover {
     text-decoration: none;
-    color: rgba(0,0,0, 0.8)
+    color: rgba(0,0,0, 0.6)
   }
 }
 
 .menuItem {
-  margin: 1.5%;
+  margin: 0.5%;
   cursor: pointer;
-  padding: 50px;
+  padding: 25px;
   float: left;
   text-align: center;
+  max-width: 30%;
   min-width: 30%;
   color: #000;
 
-  :hover {
+  &:hover {
     text-decoration: none;
     color: rgba(0,0,0, 0.1)
   }
@@ -54,6 +55,19 @@ h1, h2, strong {
     font-size: xx-large;
   }
 
+  @media screen and (max-width: 1478px) {
+    max-width: 49%;
+    min-width: 49%;
+
+    .menuDescription {
+      font-size: x-large;
+    }
+  }
+
+  @media screen and (max-width: 241px) {
+    max-width: 99%;
+    min-width: 99%;
+  }
 }
 
 .boards {

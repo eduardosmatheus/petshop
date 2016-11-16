@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import {FETCH_BREEDS, CREATE_BREED, GET_BRRED, ERROR, ROOT_URL, errorDispatch} from './'
+import {FETCH_BREEDS, CREATE_BREED, GET_BRRED, UPDATE_BREED, DELETE_BREED, ERROR, ROOT_URL, errorDispatch} from './'
 export const BREEDS_URL = 'breeds'
 
 export function fetchBreeds() {
@@ -30,6 +30,29 @@ export function getBreed(id) {
     axios.get(`${ROOT_URL}/${BREEDS_URL}/${id}`).then( response => {
       dispatch({
         type :  GET_BRRED,
+        payload : response.data
+      })
+    }).catch(errorDispatch)
+  }
+}
+
+export function updateBreed(breed) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/${BREEDS_URL}/${breed.id}`).then( response => {
+      dispatch({
+        type :  UPDATE_BRRED,
+        payload : response.data
+      })
+    }).catch(errorDispatch)
+  }
+}
+
+
+export function deleteBreed(id) {
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/${BREEDS_URL}/${id}`).then( response => {
+      dispatch({
+        type :  DELETE_BREED,
         payload : response.data
       })
     }).catch(errorDispatch)
