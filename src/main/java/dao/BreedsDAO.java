@@ -2,7 +2,6 @@ package dao;
 
 import db.JpaUtil;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
