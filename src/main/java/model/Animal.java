@@ -2,27 +2,33 @@ package model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 @JsonSerialize
 public class Animal implements Serializable {
     
-//    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     private String name;
+    
+    private Date birthday;
+    
+    @OneToOne(mappedBy = "customer_id")
     private Customer customer;
-    private Breed race;
+    
+    @OneToOne @MapsId
+    private Breed breed;
+    
+    @OneToOne @MapsId
     private Especie especie;
-
-    public Animal() {
-    }
-
-    public Animal(int id, String name, Customer customer, Breed race, Especie especie) {
-        this.id = id;
-        this.name = name;
-        this.customer = customer;
-        this.race = race;
-        this.especie = especie;
-    }
+    
+    public Animal() {}
 
     public int getId() {
         return id;
@@ -32,12 +38,24 @@ public class Animal implements Serializable {
         return name;
     }
 
-    public Customer getClient() {
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+    
+    public Customer getCustomer() {
         return customer;
     }
 
-    public Breed getRace() {
-        return race;
+    public Breed getBreed() {
+        return breed;
+    }
+
+    public void setBreed(Breed breed) {
+        this.breed = breed;
     }
 
     public Especie getEspecie() {
@@ -52,12 +70,12 @@ public class Animal implements Serializable {
         this.name = name;
     }
 
-    public void setClient(Customer client) {
-        this.customer = client;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public void setRace(Breed race) {
-        this.race = race;
+    public void setRace(Breed breed) {
+        this.breed = breed;
     }
 
     public void setEspecie(Especie especie) {
