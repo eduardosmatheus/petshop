@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchBreeds, deleteBreed } from '../../../actions/ActionsBreed'
-import { openModal } from '../../../actions/ActionsModal'
+import EspecieForm from './EspecieForm'
 import { Link } from 'react-router'
 
-import BreedComp from '../../../components/animals/breed'
+import EspecieComp from '../../../components/animals/especie'
 
-class Breeds extends Component {
+class Especies extends Component {
 
   componentWillMount() {
     if(!this.props.children)
@@ -17,11 +17,10 @@ class Breeds extends Component {
     return (
       <div className="columns is-multiline">
         {this.props.breeds.all.map(( breed ) => {
-          return (<BreedComp
+          return (<EspecieComp
             key={breed.id}
             breed={breed}
-            del={::this.props.deleteBreed}
-            openModal={::this.props.openModal}/>)
+            del={::this.props.deleteBreed} />)
           }
         )}
       </div>
@@ -33,5 +32,4 @@ function mapStateToProps(state) {
   return { breeds : state.breedState }
 }
 
-export default connect(mapStateToProps,
-  { fetchBreeds, deleteBreed, openModal })(Breeds)
+export default connect(mapStateToProps, { fetchBreeds, deleteBreed })(Especies)

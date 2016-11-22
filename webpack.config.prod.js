@@ -8,7 +8,7 @@ module.exports = {
   ],
   output: {
     path: './',
-    filename: 'bundle.js'
+    filename: 'src/main/webapp/bundle.js'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

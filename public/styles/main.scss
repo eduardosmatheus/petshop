@@ -1,76 +1,99 @@
+@import '../../node_modules/bulma/bulma';
+
+$bgColor: #fcfcfc;
+
+html {
+  background-color: $bgColor;
+}
+
+.applicationContainer {
+  margin: 0 auto;
+  width: 75%;
+}
+
 body {
-  background: #FFFAFA;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.5;
   padding: 2em 1em;
-  color: #566b78;
+  color: #444444;
+  overflow: auto;
 }
 
-h1 {
-  margin-top: 1em;
-}
 
 h1, h2, strong {
-  color: #333;
+  color: #777777;
 }
 
-.app-container {
-    margin: 0 auto;
-}
-
-.boards {
+.app-title {
   text-align: center;
-}
-
-#menuApp {
-
+  font-size: xx-large;
   margin: 0 auto;
+  margin-bottom: 1em;
+  color: #444444;
 
-  :hover {
-    text-decoration: none;
-    color: rgba(0,0,0, 0.6)
+  .fa {
+    font-size: 50px;
+    color: #444444;
+
+    &:hover {
+      color: #000;
+    }
+
   }
+
 }
 
-.menuItem {
-  margin: 0.5%;
-  cursor: pointer;
-  padding: 25px;
-  float: left;
-  text-align: center;
-  max-width: 30%;
-  min-width: 30%;
-  color: #000;
-
-  &:hover {
-    text-decoration: none;
-    color: rgba(0,0,0, 0.1)
+.menu-app {
+  margin-top: 100px;
+  a {
+    font-size: 30px
   }
 
   .fa {
-    margin: 0 auto;
+    font-size: 50px;
+    color: #fcfcfc;
   }
 
-  .menuDescription {
-    font-size: xx-large;
+  .is-parent {
+    padding: 3px;
   }
 
-  @media screen and (max-width: 1478px) {
-    max-width: 49%;
-    min-width: 49%;
+  .tile.is-vertical > .tile.is-child:not(:last-child) {
+    margin-bottom: 5px!important;
+  }
 
-    .menuDescription {
-      font-size: x-large;
+  .menu-item {
+    padding: 25px;
+
+    .menu-item-content {
+      min-height: 100%;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: bolder;
     }
-  }
 
-  @media screen and (max-width: 241px) {
-    max-width: 99%;
-    min-width: 99%;
+    .menu-app-description {
+      color: #fcfcfc;
+      text-decoration: none;
+    }
   }
 }
 
-.boards {
-  margin: 0 auto;
-  max-width: 70%;
+
+.applicationContainer {
+
+  .card { 
+  }
+
+  .search-icon-content {
+    text-align: center;
+    vertical-align: middle;
+
+    .button.is-white.search-icon {
+        height: 100%;
+        width: 100%;
+        background-color: $bgColor;
+    }
+  }
+
 }

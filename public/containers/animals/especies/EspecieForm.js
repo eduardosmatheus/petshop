@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { reduxForm, change as changeFieldValue } from 'redux-form'
 import { createBreed, getBreed, updateBreed } from '../../../actions/ActionsBreed'
-import  breedValidate from './BreedValidation'
+import  EspecieValidation from './EspecieValidation'
 
 
-class BreedForm extends Component {
+class EspecieForm extends Component {
 
   componentWillMount() {
     let { id } = this.props.params
@@ -53,5 +53,5 @@ function mapStateToProps(state) {
 export default reduxForm({
   form : 'BreedForm',
   fields : ['id', 'name'],
-  validate : breedValidate
-}, mapStateToProps, { createBreed, updateBreed, getBreed, changeFieldValue })(BreedForm)
+  validate : EspecieValidation
+}, mapStateToProps, { createBreed, updateBreed, getBreed, changeFieldValue })(EspecieForm)

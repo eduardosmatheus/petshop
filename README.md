@@ -1,10 +1,10 @@
-#Petshop
+#Petshop (NOT FINISHED YET)
 
 A RESTful API to communicate with a petshop's client
 
 #Motivation
 
-We have to create a solution for petshops that are saving their annotations in notes and cannot manage them well, so they can have better tracking of their processes and reports.
+Academic work where we have to create a solution for petshops that are saving their annotations in notes and cannot manage them well, so they can have better tracking of their processes and reports.
 
 #Stack
 
@@ -18,6 +18,8 @@ We have to create a solution for petshops that are saving their annotations in n
 
 ```bash
    mvn install
+   npm install
+   npm run build:prod
 ```
 
 - Running tests

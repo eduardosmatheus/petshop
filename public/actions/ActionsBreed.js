@@ -37,8 +37,9 @@ export function getBreed(id) {
 }
 
 export function updateBreed(breed) {
+  console.log('breed: ', breed);
   return dispatch => {
-    axios.put(`${ROOT_URL}/${BREEDS_URL}/${breed.id}`).then( response => {
+    axios.put(`${ROOT_URL}/${BREEDS_URL}/edit`, breed.name, { headers : {'Content-Type' : 'text/plain'} }).then( response => {
       dispatch({
         type :  UPDATE_BRRED,
         payload : response.data
@@ -48,9 +49,19 @@ export function updateBreed(breed) {
 }
 
 
-export function deleteBreed(id) {
+export function deleteBreed(breed) {
   return dispatch => {
-    axios.delete(`${ROOT_URL}/${BREEDS_URL}/${id}`).then( response => {
+    axios.delete(`${ROOT_URL}/${BREEDS_URL}/${breed}`, breed,
+      {
+        headers : {
+          'Content-Type' : 'application/json',
+          'Access-Control-Request-Origin': '*',
+          'Access-Control-Request-Methods': 'DELETE'
+        }
+      }
+
+
+    ).then( response => {
       dispatch({
         type :  DELETE_BREED,
         payload : response.data

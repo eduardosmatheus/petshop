@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import Modal from './../containers/Modal'
 
 export default class App extends Component {
   constructor(props){
@@ -7,11 +8,12 @@ export default class App extends Component {
   }
 
   render() {
-    let {children} = this.props
+    let {children} = this.props 
     return (
       <div className="boards">
-        <h1><Link to="/"><i className="fa fa-home" aria-hidden="true"></i></Link> Íbex Petshop Manager</h1>
-        {children}
+        <h2 className="app-title title is-2"><Link to="/"><i className="fa fa-home fa-5x"></i></Link> Íbex Petshop Manager</h2>
+        <div className="applicationContainer">{ children }</div>
+        <Modal />
       </div>
     );
   }

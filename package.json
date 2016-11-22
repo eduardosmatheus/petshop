@@ -4,7 +4,7 @@
   "description": "Trabalho academico para fazer gestão de um petshop",
   "main": "index.js",
   "scripts": {
-      "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progres --color",
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progres --color",
     "dev": "cross-env NODE_ENV=development npm start",
     "start": "node devServer.js",
     "lint": "eslint public"
@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "axios": "^0.15.2",
-    "bootstrap": "^3.3.7",
     "bulma": "^0.2.3",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",

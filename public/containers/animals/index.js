@@ -1,33 +1,53 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { fetchPets } from '../../actions/ActionsAnimals'
 import { Link } from 'react-router'
+import Animal from '../../components/animals/Animal'
+import GridHeader from '../../components/GridHeader'
 
-class Breeds extends Component {
+class Animals extends Component {
 
-  componentWillMount() {
+  _renderChildrens() {
+    if(this.props.children)
+      return (<div>{this.props.children}</div>)
+
+    let { all } = this.props.animals
+    return  (
+      <div className="columns is-multiline">
+        {all.map((pet, i) => {
+          //TODO: mudar key de i pelo ID do pet.
+          return (<Animal key={i} pet={pet} /> )
+        })}
+      </div>)
   }
 
-  render() {
-    if(this.props.children)
-      return (<div>{ this.props.children }</div>)
 
-    return (
-      <div>
-        <table className="table table-striped table-hover ">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Nome</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody> 
-          </tbody>
-        </table>
-      </div>
-    );
+  render() {
+    let { pathname } = this.props.location
+    return (<div>
+              <div className="tabs is-centered is-boxed is-medium">
+                <ul>
+                  <li className={pathname == '/animals' ? 'is-active' : ''}>
+                    <Link to="/animals">
+                      <span>Pets</span>
+                    </Link>
+                  </li>
+                  <li className={pathname == '/animals/breeds' ? 'is-active' : ''}>
+                    <Link to="/animals/breeds">
+                      <span>Raças</span>
+                    </Link>
+                  </li>
+                  <li className={pathname == '/animals/especies' ? 'is-active' : ''}>
+                    <Link to="/animals/especies">
+                      <span>Especies</span>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="container">
+                <GridHeader />
+                {this._renderChildrens()}
+              </div>
+            </div>)
   }
 }
 
@@ -35,4 +55,4 @@ function mapStateToProps(state) {
   return { animals : state.animals }
 }
 
-export default connect(mapStateToProps, {  })(Breeds)
+export default connect(mapStateToProps, {  })(Animals)
