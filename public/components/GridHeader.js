@@ -7,12 +7,10 @@ export default class GridHeader extends Component {
   }
 
   render() {
-    let {children} = this.props
-    console.log(children);
     return (
       <div className="columns">
         <div className="column is-2">
-          <a className="button is-primary">Adicionar</a>
+          <a className="button is-primary" onClick={() => {this.props.openModal()}}>Adicionar</a>
         </div>
         <div className="column is-9">
           <input className="input" type="text" placeholder="Pesquisar..."/>

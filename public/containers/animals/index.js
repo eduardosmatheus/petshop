@@ -44,7 +44,6 @@ class Animals extends Component {
                 </ul>
               </div>
               <div className="container">
-                <GridHeader />
                 {this._renderChildrens()}
               </div>
             </div>)

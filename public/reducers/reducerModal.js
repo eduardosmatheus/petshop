@@ -2,8 +2,7 @@ const INITIAL_STATE = {
   isActive : false,
   body : {
     modalTitle : "",
-    contentRender : () => {},
-    saveBtnAction : () => {}
+    contentRender : () => {}
   }
 }
 
@@ -13,6 +12,6 @@ export default function(state = INITIAL_STATE, action) {
     state = { body : action.payload, isActive : true }
     return state
   }
-  
+
   return INITIAL_STATE;
 }

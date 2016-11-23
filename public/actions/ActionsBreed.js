@@ -14,9 +14,9 @@ export function fetchBreeds() {
   }
 }
 
-export function createBreed(props) {
+export function createBreed(breed) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/${BREEDS_URL}`, props.name, { headers : {'Content-Type' : 'text/plain'} }).then( response => {
+    axios.post(`${ROOT_URL}/${BREEDS_URL}`, breed.name, { headers : {'Content-Type' : 'text/plain'} }).then( response => {
       dispatch({
         type : CREATE_BREED,
         payload : response.data
@@ -37,7 +37,6 @@ export function getBreed(id) {
 }
 
 export function updateBreed(breed) {
-  console.log('breed: ', breed);
   return dispatch => {
     axios.put(`${ROOT_URL}/${BREEDS_URL}/edit`, breed.name, { headers : {'Content-Type' : 'text/plain'} }).then( response => {
       dispatch({
