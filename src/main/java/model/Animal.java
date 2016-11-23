@@ -19,8 +19,8 @@ public class Animal implements Serializable {
     
     private Date birthday;
     
-    @OneToOne(mappedBy = "customer_id")
-    private Customer customer;
+    /*@OneToOne(mappedBy = "customer_id")
+    private Customer customer;*/
     
     @OneToOne @MapsId
     private Breed breed;
@@ -46,9 +46,9 @@ public class Animal implements Serializable {
         this.birthday = birthday;
     }
     
-    public Customer getCustomer() {
+    /*public Customer getCustomer() {
         return customer;
-    }
+    }*/
 
     public Breed getBreed() {
         return breed;
@@ -70,9 +70,9 @@ public class Animal implements Serializable {
         this.name = name;
     }
 
-    public void setCustomer(Customer customer) {
+    /*public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
+    }*/
 
     public void setRace(Breed breed) {
         this.breed = breed;

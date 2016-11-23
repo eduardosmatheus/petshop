@@ -1,8 +1,5 @@
 package services;
 
-import javax.ws.rs.Path;
-
-@Path("animals")
 public class AnimalsService {
 
     /*@GET

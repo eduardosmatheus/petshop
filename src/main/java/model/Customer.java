@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
 @JsonSerialize
-@Entity
+//@Entity
 public class Customer implements Serializable {
     
     @JsonView @Id

@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Especie;
 
-@Path("especies")
+//@Path("especies")
 public class EspeciesService {
 
     @Context
