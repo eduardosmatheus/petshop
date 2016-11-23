@@ -6,7 +6,6 @@ class BreedForm extends Component {
 
   render() {
     let { fields : { id, name } } = this.props
-    console.log(name.error);
     return (
       <form onSubmit={ this.props.handleSubmit(this.props.action) }>
         <p className="control has-icon has-icon-right">
@@ -15,9 +14,9 @@ class BreedForm extends Component {
           <label className="label">Descrição</label>
         </p>
         <p className="control has-icon has-icon-right">
-          <input type="text" className={`input ${name.error && name.touched ? `is-danger` : ``} `} {...name} />
+          <input type="text" className={`input ${name.error && name.touched ? `is-danger` : ``} `} {...name} maxLength='60'/>
           {name.error && name.touched && <i className="fa fa-warning"></i>}
-          {name.error && name.touched && <span className="help is-danger">{ name.error }</span>} 
+          {name.error && name.touched && <span className="help is-danger">{ name.error }</span>}
         </p>
         <p className="control">
           <button type="submit"  className="button is-primary">Gravar</button>

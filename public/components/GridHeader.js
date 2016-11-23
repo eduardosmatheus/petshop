@@ -13,7 +13,7 @@ export default class GridHeader extends Component {
           <a className="button is-primary" onClick={() => {this.props.openModal()}}>Adicionar</a>
         </div>
         <div className="column is-9">
-          <input className="input" type="text" placeholder="Pesquisar..."/>
+          <input className="input" type="text" placeholder="Pesquisar..." onChange={(event) => { ::this.props.onChangeSearch(event.target.value) }}/>
         </div>
         <div className="column is-1 search-icon-content">
           <div className="button is-white search-icon">

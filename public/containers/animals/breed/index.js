@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchBreeds, createBreed, updateBreed, deleteBreed, getBreed, clearActualBreed } from '../../../actions/ActionsBreed'
+import { fetchBreeds, createBreed, updateBreed, deleteBreed, getBreed, clearActualBreed, filterBreed } from '../../../actions/ActionsBreed'
 import { openModal } from '../../../actions/ActionsModal'
 import { Link } from 'react-router'
 
@@ -38,6 +38,7 @@ class Breeds extends Component {
           openModal={ ()=> {
             ::this.props.openModal(this._buildModalStateToAdd())
           }}
+          onChangeSearch={ (text) => {::this.props.filterBreed(text)}}
         />
         <div className="columns is-multiline">
           {this.props.breeds.all.map(( breed ) => {
@@ -71,4 +72,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  { fetchBreeds, getBreed, deleteBreed, openModal, createBreed, updateBreed, clearActualBreed })(Breeds)
+  { fetchBreeds, getBreed, deleteBreed, openModal, createBreed, updateBreed, clearActualBreed, filterBreed })(Breeds)
