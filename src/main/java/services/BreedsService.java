@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import model.Breed;
 import dao.BreedsDAO;
 import java.util.List;
+import javax.ws.rs.OPTIONS;
 
 @Path("breeds")
 public class BreedsService {
@@ -26,10 +27,6 @@ public class BreedsService {
         if(breeds.isEmpty())
             return Response.status(Response.Status.NOT_FOUND).build();
         return Response.ok(breeds, MediaType.APPLICATION_JSON)
-                //TO DO: Deve ter uma forma de padronizar isso pra toda response. (Problema com o CORS)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-                .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
                 .build();
     }
     
@@ -40,29 +37,20 @@ public class BreedsService {
         Breed r = dao.findOne(id); 
         if(r != null)
             return Response.ok(r, MediaType.APPLICATION_JSON)
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-                    .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
                     .build();
         return Response.status(Response.Status.NOT_FOUND).build(); 
     }
     
     @POST
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(String raceName) { 
+    public Response create(Breed raceName) { 
         Breed f = new Breed();
-        f.setName(raceName);
+        f.setName(raceName.getName());
         if(dao.create(f))
             return Response.status(Response.Status.CREATED)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-                .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
                 .entity(f).build();
         return Response.status(Response.Status.BAD_REQUEST)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-            .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
             .build(); 
     }
     
@@ -74,15 +62,9 @@ public class BreedsService {
         Breed result = dao.update(newRace);
         if(result == null) 
             return Response.noContent()
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-                .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
                 .build();
         
         return Response.ok(newRace)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-            .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
             .build(); 
     }
     
@@ -93,14 +75,9 @@ public class BreedsService {
     public Response delete(Breed r) {
         if(dao.delete(r))
             return Response.ok(String.format("Breed %s deleted successfully!", r.getName()))
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-                .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-            .header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, HEAD")
             .build();
     }
+    
 }

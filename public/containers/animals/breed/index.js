@@ -56,7 +56,7 @@ class Breeds extends Component {
                       this.props.getBreed(breed.id)
                       this.props.openModal(this._buildModalStateToEdit())
                     }}>Edit</a>
-                    <a className="card-footer-item" onClick={() => {this.props.deleteBreed(breed.id)} }>Delete</a>
+                    <a className="card-footer-item" onClick={() => {this.props.deleteBreed(breed)} }>Delete</a>
                   </footer>
                 </div>
               </div>) }
