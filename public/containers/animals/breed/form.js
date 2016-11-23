@@ -4,24 +4,24 @@ import { reduxForm, change as changeFieldValue } from 'redux-form'
 
 class BreedForm extends Component {
 
-  render() { 
+  render() {
+    let { fields : { id, name } } = this.props
+    console.log(name.error);
     return (
       <form onSubmit={ this.props.handleSubmit(this.props.action) }>
-        <h3>Raça: </h3>
-        <div className="form-group">
-          <label>Id</label>
-          <input type="text" className="form-control" { ...this.props.fields.id } />
-        </div>
-        <div className="form-group">
-          <label>Descrição</label>
-          <input type="text" className="form-control" {...this.props.fields.name} />
-          <div>
-            {this.props.fields.name.touched ? this.props.fields.name.error : ''}
-          </div>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Gravar
-        </button>
+        <p className="control has-icon has-icon-right">
+          <label className="label">Id</label>
+          <input type="text" className="input" { ...id } readOnly/>
+          <label className="label">Descrição</label>
+        </p>
+        <p className="control has-icon has-icon-right">
+          <input type="text" className={`input ${name.error && name.touched ? `is-danger` : ``} `} {...name} />
+          {name.error && name.touched && <i className="fa fa-warning"></i>}
+          {name.error && name.touched && <span className="help is-danger">{ name.error }</span>} 
+        </p>
+        <p className="control">
+          <button type="submit"  className="button is-primary">Gravar</button>
+        </p>
       </form>
     )
   }

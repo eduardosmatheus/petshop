@@ -1,4 +1,4 @@
-import { FETCH_BREEDS, CREATE_BREED, GET_BRRED, UPDATE_BREED, DELETE_BREED, ERROR } from '../actions'
+import { CLEAR_ACTUAL_BREED, FETCH_BREEDS, CREATE_BREED, GET_BRRED, UPDATE_BREED, DELETE_BREED, ERROR } from '../actions'
 
 const INITIAL_STATE = {
   all : [],
@@ -31,6 +31,9 @@ export default function(state = INITIAL_STATE, action) {
       break
     case GET_BRRED:
       return {...state, actual : action.payload }
+      break
+    case CLEAR_ACTUAL_BREED:
+      return {...state, actual : INITIAL_STATE.actual}
       break
     case ERROR :
       return {...state, error : action.error}

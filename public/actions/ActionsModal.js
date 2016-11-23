@@ -1,4 +1,4 @@
-export function openModal(modalState) { 
+export function openModal(modalState) {
   return dispatch => {
     dispatch({
       type : 'OPEN_MODAL',
@@ -10,8 +10,7 @@ export function openModal(modalState) {
 export function closeModal() {
   return dispatch => {
     dispatch({
-      type : 'CLOSE_MODAL',
-      payload : {}
+      type : 'CLOSE_MODAL'
     })
   }
 }

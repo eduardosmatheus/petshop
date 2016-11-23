@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchBreeds, createBreed, updateBreed, deleteBreed, getBreed } from '../../../actions/ActionsBreed'
+import { fetchBreeds, createBreed, updateBreed, deleteBreed, getBreed, clearActualBreed } from '../../../actions/ActionsBreed'
 import { openModal } from '../../../actions/ActionsModal'
 import { Link } from 'react-router'
 
@@ -15,26 +15,30 @@ class Breeds extends Component {
       this.props.fetchBreeds()
   }
 
-  _buildModalStateToEdit(breed) {
+  _buildModalStateToEdit() {
     return {
       modalTitle : "Editar Raça",
-      contentRender : (<BreedForm action={(breed) => { ::this.props.updateBreed(breed) }}/>)
+      contentRender : () => { return (<BreedForm action={(breed) => { ::this.props.updateBreed(breed) }}/>)},
+      onModalUnmount : () => { ::this.props.clearActualBreed() }
     }
   }
 
-  _buildModalStateToAdd(breed) {
+  _buildModalStateToAdd() {
     return {
       modalTitle : "Adicionar Raça",
-      contentRender : (<BreedForm action={(breed) => {  ::this.props.createBreed(breed) }}/>)
+      contentRender : () => { return (<BreedForm action={(breed) => {  ::this.props.createBreed(breed) }}/>)},
+      onModalUnmount : () => { ::this.props.clearActualBreed() }
     }
   }
 
   render() {
     return (
-      <div> 
-        <GridHeader openModal={ ()=> {
-          ::this.props.openModal(this._buildModalStateToAdd())
-        }}/>
+      <div>
+        <GridHeader
+          openModal={ ()=> {
+            ::this.props.openModal(this._buildModalStateToAdd())
+          }}
+        />
         <div className="columns is-multiline">
           {this.props.breeds.all.map(( breed ) => {
             return (<div className="column is-one-third area-item animal-card" key={breed.id}>
@@ -49,7 +53,7 @@ class Breeds extends Component {
                   <footer className="card-footer">
                     <a className="card-footer-item" onClick={() => {
                       this.props.getBreed(breed.id)
-                      this.props.openModal(this._buildModalStateToEdit(breed))
+                      this.props.openModal(this._buildModalStateToEdit())
                     }}>Edit</a>
                     <a className="card-footer-item" onClick={() => {this.props.deleteBreed(breed.id)} }>Delete</a>
                   </footer>
@@ -67,4 +71,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  { fetchBreeds, getBreed, deleteBreed, openModal, createBreed, updateBreed })(Breeds)
+  { fetchBreeds, getBreed, deleteBreed, openModal, createBreed, updateBreed, clearActualBreed })(Breeds)

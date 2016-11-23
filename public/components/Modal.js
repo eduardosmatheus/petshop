@@ -24,7 +24,7 @@ class Modal extends Component {
             <button className="delete"  onClick={() => {closeModal()} }></button>
           </header>
           <section className="modal-card-body">
-            {body.contentRender}
+            {body.contentRender()}
           </section>
         </div>
       </div>

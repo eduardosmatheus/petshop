@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-import {FETCH_BREEDS, CREATE_BREED, GET_BRRED, UPDATE_BREED, DELETE_BREED, ERROR, ROOT_URL, errorDispatch} from './'
+import {CLEAR_ACTUAL_BREED, FETCH_BREEDS, CREATE_BREED, GET_BRRED, UPDATE_BREED, DELETE_BREED, ERROR, ROOT_URL, errorDispatch} from './'
+
 export const BREEDS_URL = 'breeds'
 
 export function fetchBreeds() {
@@ -66,5 +67,13 @@ export function deleteBreed(breed) {
         payload : response.data
       })
     }).catch(errorDispatch)
+  }
+}
+
+export function clearActualBreed() {
+  return dispatch => {
+    return dispatch({
+      type : CLEAR_ACTUAL_BREED
+    })
   }
 }
