@@ -2,15 +2,10 @@ package model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @JsonSerialize
-@Entity
 public class Especie implements Serializable {
     
-    @Id @GeneratedValue
     private int id;
     private String description;
 

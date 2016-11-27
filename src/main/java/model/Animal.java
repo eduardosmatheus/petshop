@@ -3,29 +3,15 @@ package model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
 @JsonSerialize
 public class Animal implements Serializable {
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
     private String name;
-    
     private Date birthday;
-    
-    /*@OneToOne(mappedBy = "customer_id")
-    private Customer customer;*/
-    
-    @OneToOne @MapsId
+    private Person customer;
     private Breed breed;
-    
-    @OneToOne @MapsId
     private Especie especie;
     
     public Animal() {}
@@ -46,9 +32,9 @@ public class Animal implements Serializable {
         this.birthday = birthday;
     }
     
-    /*public Customer getCustomer() {
+    public Person getCustomer() {
         return customer;
-    }*/
+    }
 
     public Breed getBreed() {
         return breed;
@@ -70,9 +56,9 @@ public class Animal implements Serializable {
         this.name = name;
     }
 
-    /*public void setCustomer(Customer customer) {
+    public void setCustomer(Person customer) {
         this.customer = customer;
-    }*/
+    }
 
     public void setRace(Breed breed) {
         this.breed = breed;

@@ -1,36 +1,31 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 
 @JsonSerialize
-//@Entity
-public class Customer implements Serializable {
+public class Person implements Serializable {
     
-    @JsonView @Id
+    private int id;
     private String cpf;
-    @JsonView
     private String name;
-    @JsonView
     private long age;
-    @JsonView
     private String address;
-    @JsonView
     private String phone;
-    
-    @JsonView @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId
     private List<Animal> animals = new ArrayList<>();
     
-    public Customer() {
+    public Person() {
+    }
+
+    public Person(int id, String cpf, String name, long age, String address, String phone) {
+        this.id = id;
+        this.cpf = cpf;
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.phone = phone;
     }
     
     public String getCpf() {
@@ -80,6 +75,12 @@ public class Customer implements Serializable {
     public void setAnimals(List<Animal> animals) {
         this.animals = animals;
     }
-    
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }    
 }

@@ -12,7 +12,7 @@ create table especies(
   description varchar(255)
 );
 
-create table customers(
+create table people(
   id int not null auto_increment primary key,
   cpf varchar(255),
   name varchar(255),
@@ -22,8 +22,8 @@ create table customers(
 
 create table animals(
   id int not null auto_increment primary key,
-  customer_id int not null,
-  FOREIGN KEY(customer_id) references customers(id),
+  person_id int not null,
+  FOREIGN KEY(person_id) references people(id),
   breed_id int not null,
   FOREIGN KEY(breed_id) references breeds(id),
   especie_id int not null,
