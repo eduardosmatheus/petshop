@@ -1,54 +1,58 @@
 package dao;
 
-import db.JpaUtil;
+import db.ConnectionApi;
+import db.Maker;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 import model.Breed;
 
 public class BreedsDAO implements Persistible<Breed> {
 
-    private EntityManager em = JpaUtil.getInstance().getEntityManager();
+    private static final Maker<Breed> breedMaker =  
+            (conexao) -> new Breed(conexao.get("id", Integer.class), conexao.get("description", String.class));
             
     @Override
     public Breed findOne(int id) {
-        Breed b = em.find(Breed.class, id);
-        return b;
+        ConnectionApi conexao = new ConnectionApi("select * from breeds where id = ?", id);
+        conexao.executeQuery();
+        Breed result = conexao.next() ? breedMaker.make(conexao) : null;
+        conexao.close();
+        return result;
     }
 
     @Override
     public List<Breed> all() {
-        TypedQuery<Breed> q = em.createQuery("from Breed", Breed.class);
-        return q.getResultList();
-    }
-    
-    @Override
-    public Breed update(Breed f) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.merge(f);
-        transaction.commit();
-        return f;
+        ConnectionApi conexao = new ConnectionApi("select * from breeds");
+        conexao.executeQuery();
+        List<Breed> breeds = new ArrayList<>();
+        while(conexao.next())
+            breeds.add(breedMaker.make(conexao));
+        conexao.close();
+        return breeds;
     }
 
     @Override
-    public boolean delete(Breed breed) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        Object e = em.merge(breed);
-        em.remove(e);
-        transaction.commit();
-        return findOne(breed.getId()) == null;
+    public boolean create(Breed entity) {
+        ConnectionApi conexao = new ConnectionApi("insert into breeds (description) values (?)", entity.getName());
+        final int result = conexao.executeUpdate();
+        conexao.close();
+        return result > 0;
     }
 
     @Override
-    public boolean create(Breed breed) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(breed);
-        transaction.commit();
-        return findOne(breed.getId()) != null;
+    public Breed update(Breed entity) {
+        ConnectionApi conexao = new ConnectionApi("update breeds "
+                + "set description = ? where id = ?", entity.getName(), entity.getId());
+        conexao.executeUpdate();
+        conexao.close();
+        return findOne(entity.getId());
     }
 
+    @Override
+    public boolean delete(Breed entity) {
+        ConnectionApi conexao = new ConnectionApi("delete from breeds where id = ?", entity.getId());
+        final int rowsAffected = conexao.executeUpdate();
+        conexao.close();
+        return rowsAffected > 0;
+    }
 }
