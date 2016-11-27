@@ -44,6 +44,17 @@ public class PersonDAO implements Persistible<Person> {
                 entity.getAge(), entity.getAddress(), entity.getPhone());
         final int result = conexao.executeUpdate();
         conexao.close();
+        if(result > 0) {
+            if(!entity.getAnimals().isEmpty()){
+                entity.getAnimals().forEach(animal -> {
+                    ConnectionApi personsAnimals = new ConnectionApi(
+                            "insert into person_animals (animal_id, person_id) "
+                            + "values(?,?)", entity.getId(), animal.getId());
+                    personsAnimals.executeUpdate();
+                    personsAnimals.close();
+                });                
+            }
+        }
         return result > 0;
     }
 
