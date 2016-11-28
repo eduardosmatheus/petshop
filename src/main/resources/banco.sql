@@ -53,7 +53,7 @@ create table schedule(
   diary_config_id int not null,
   foreign key(diary_config_id) references diary_config(id),
   schedule_date date,
-  schedule_hour time,
+  schedule_time smallint,
   animal_id int not null,
   foreign key(animal_id) references animal(id),
   observations varchar(255)
