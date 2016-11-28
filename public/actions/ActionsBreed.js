@@ -1,4 +1,4 @@
-import axios from 'axios' 
+import axios from 'axios'
 
 import {CLEAR_ACTUAL_BREED, FETCH_BREEDS, CREATE_BREED,
   GET_BRRED, UPDATE_BREED, DELETE_BREED,
@@ -42,9 +42,10 @@ export function getBreed(id) {
 
 export function updateBreed(breed) {
   return dispatch => {
-    axios.put(`${ROOT_URL}/${BREEDS_URL}/${breed.id}`, breed).then( response => {
+    axios.put(`${ROOT_URL}/${BREEDS_URL}/${breed.id}`, breed)
+    .then( response => {
       dispatch({
-        type :  UPDATE_BRRED,
+        type :  UPDATE_BREED,
         payload : response.data
       })
     }).catch(errorDispatch)
@@ -54,18 +55,11 @@ export function updateBreed(breed) {
 
 export function deleteBreed(breed) {
   return dispatch => {
-    axios.delete(`${ROOT_URL}/${BREEDS_URL}/${breed.id}`, breed,
-      {
-        headers : {
-          'Content-Type' : 'application/json',
-          'Access-Control-Request-Origin': '*',
-          'Access-Control-Request-Methods': 'DELETE'
-        }
-      }
-    ).then( response => {
+    axios.delete(`${ROOT_URL}/${BREEDS_URL}/${breed.id}`)
+    .then( response => {
       dispatch({
         type :  DELETE_BREED,
-        payload : response.data
+        payload : breed
       })
     }).catch(errorDispatch)
   }

@@ -25,27 +25,32 @@ public class BreedsDAO implements Persistible<Breed> {
     
     @Override
     public Breed update(Breed f) {
+        int id = f.getId();
         EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
+        if(transaction.isActive()) 
+            transaction.begin();
         em.merge(f);
         transaction.commit();
-        return f;
+        return findOne(id);
     }
 
     @Override
     public boolean delete(Breed breed) {
+        int id = breed.getId();
         EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
+        if(transaction.isActive()) 
+            transaction.begin();
         Object e = em.merge(breed);
         em.remove(e);
         transaction.commit();
-        return findOne(breed.getId()) == null;
+        return findOne(id) == null;
     }
 
     @Override
     public boolean create(Breed breed) {
         EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
+        if(transaction.isActive()) 
+            transaction.begin();
         em.persist(breed);
         transaction.commit();
         return findOne(breed.getId()) != null;

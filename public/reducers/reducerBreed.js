@@ -22,13 +22,18 @@ export default function(state = INITIAL_STATE, action) {
       return {...state, all : state.all}
       break
     case UPDATE_BREED:
-      let i = all.indexOf(state.actual)
-      all.splice(i, 1, action.payload)
-      return {...state, all : state.all, actual : INITIAL_STATE.actual}
+      all = all.map((ob) => {
+        if(ob.id === actual.id) {
+          console.log('ob',action.payload);
+          return action.payload
+        }
+        return ob
+      })
+      return {...state, all : all, actual : INITIAL_STATE.actual}
       break
     case DELETE_BREED:
-      let x = all.indexOf(state.actual)
-      all.splice(i, 1)
+      let x = all.indexOf(action.payload)
+      all.splice(x, 1)
       return {...state, all : state.all, actual : INITIAL_STATE.actual}
       break
     case GET_BRRED:

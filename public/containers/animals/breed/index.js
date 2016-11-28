@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchBreeds, createBreed, updateBreed, deleteBreed, getBreed, clearActualBreed, filterBreed } from '../../../actions/ActionsBreed'
-import { openModal } from '../../../actions/ActionsModal'
+import { openModal, closeModal } from '../../../actions/ActionsModal'
 import { Link } from 'react-router'
 
 import BreedForm from './form'
@@ -18,7 +18,10 @@ class Breeds extends Component {
   _buildModalStateToEdit() {
     return {
       modalTitle : "Editar Raça",
-      contentRender : () => { return (<BreedForm action={(breed) => { ::this.props.updateBreed(breed) }}/>)},
+      contentRender : () => { return (<BreedForm action={(breed) => {
+        ::this.props.closeModal()
+        ::this.props.updateBreed(breed)
+      }}/>)},
       onModalUnmount : () => { ::this.props.clearActualBreed() }
     }
   }
@@ -26,7 +29,10 @@ class Breeds extends Component {
   _buildModalStateToAdd() {
     return {
       modalTitle : "Adicionar Raça",
-      contentRender : () => { return (<BreedForm action={(breed) => {  ::this.props.createBreed(breed) }}/>)},
+      contentRender : () => { return (<BreedForm action={(breed) => {
+        ::this.props.closeModal()
+        ::this.props.createBreed(breed)
+      }}/>)},
       onModalUnmount : () => { ::this.props.clearActualBreed() }
     }
   }
@@ -72,4 +78,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  { fetchBreeds, getBreed, deleteBreed, openModal, createBreed, updateBreed, clearActualBreed, filterBreed })(Breeds)
+  { fetchBreeds, getBreed, deleteBreed, createBreed, updateBreed, clearActualBreed, filterBreed, closeModal, openModal })(Breeds)

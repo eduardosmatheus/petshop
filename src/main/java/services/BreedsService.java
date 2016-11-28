@@ -13,16 +13,15 @@ import javax.ws.rs.core.Response;
 import model.Breed;
 import dao.BreedsDAO;
 import java.util.List;
-import javax.ws.rs.OPTIONS;
 
 @Path("breeds")
 public class BreedsService {
-    
-    private BreedsDAO dao = new BreedsDAO();
+     
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findAll() {
+    public Response findAll() { 
+        BreedsDAO dao = new BreedsDAO();
         List<Breed> breeds = dao.all();
         if(breeds.isEmpty())
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -34,6 +33,7 @@ public class BreedsService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") int id) {
+        BreedsDAO dao = new BreedsDAO();
         Breed r = dao.findOne(id); 
         if(r != null)
             return Response.ok(r, MediaType.APPLICATION_JSON)
@@ -45,6 +45,7 @@ public class BreedsService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(Breed raceName) { 
+        BreedsDAO dao = new BreedsDAO();
         Breed f = new Breed();
         f.setName(raceName.getName());
         if(dao.create(f))
@@ -59,6 +60,7 @@ public class BreedsService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response put(Breed newRace) {
+        BreedsDAO dao = new BreedsDAO();
         Breed result = dao.update(newRace);
         if(result == null) 
             return Response.noContent()
@@ -70,11 +72,12 @@ public class BreedsService {
     
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response delete(Breed r) {
+    public Response delete(@PathParam("id") final int id) { 
+        BreedsDAO dao = new BreedsDAO(); 
+        Breed r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok(String.format("Breed %s deleted successfully!", r.getName()))
+            return Response.ok("Breed deleted successfully!")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
             .build();
