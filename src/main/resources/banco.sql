@@ -129,4 +129,3 @@ CREATE TABLE itens_service_orders (
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );
-

@@ -60,10 +60,6 @@ public class Animal implements Serializable {
         this.customer = customer;
     }
 
-    public void setRace(Breed breed) {
-        this.breed = breed;
-    }
-
     public void setEspecie(Especie especie) {
         this.especie = especie;
     }

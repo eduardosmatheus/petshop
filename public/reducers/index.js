@@ -1,17 +1,22 @@
 import { combineReducers } from 'redux'
+
 import BreedsReducer from './reducerBreed'
 import EspecieReducer from './reducerEspecie'
 import AnimalsReducer from './reducerAnimals'
+
+import CustomerReducer from './reducerCustomer'
+
 import ModalReducer from './reducerModal'
 
 import { reducer as formReducer } from 'redux-form'
 
 const rootReducer = combineReducers({
   breedState : BreedsReducer,
+  especieState : EspecieReducer,
   animals : AnimalsReducer,
+  customerState : CustomerReducer,
   form : formReducer,
   modal : ModalReducer,
-  especieState : EspecieReducer
 })
 
 export default rootReducer

@@ -19,8 +19,7 @@ export function fetchBreeds() {
 
 export function createBreed(breed) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/${BREEDS_URL}`, breed).then( response => {
-      console.log('Isso vem do server? ' , response.data);
+    axios.post(`${ROOT_URL}/${BREEDS_URL}`, breed).then( response => { 
       dispatch({
         type : CREATE_BREED,
         payload : response.data

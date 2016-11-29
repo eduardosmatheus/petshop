@@ -14,7 +14,7 @@ import model.Customer;
 import dao.CustomerDAO;
 import java.util.List;
 
-@Path("customer")
+@Path("customers")
 public class CustomerService {
      
     

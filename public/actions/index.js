@@ -12,6 +12,13 @@ export const UPDATE_ESPECIE = 'UPDATE_ESPECIE'
 export const DELETE_ESPECIE = 'DELETE_ESPECIE'
 export const CLEAR_ACTUAL_ESPECIE = 'CLEAR_ACTUAL_ESPECIE'
 
+export const FETCH_CUSTOMERS = 'FETCH_CUSTOMERS'
+export const CREATE_CUSTOMER = 'CREATE_CUSTOMER'
+export const GET_CUSTOMER = 'GET_CUSTOMER'
+export const UPDATE_CUSTOMER = 'UPDATE_CUSTOMER'
+export const DELETE_CUSTOMER = 'DELETE_CUSTOMER'
+export const CLEAR_ACTUAL_CUSTOMER = 'CLEAR_ACTUAL_CUSTOMER'
+
 export const ERROR = 'ERROR'
 export const ROOT_URL = 'http://localhost:8080/PetshopWebApi'
 export const errorDispatch = ((err) => ({ type : ERROR, error : err })  )
