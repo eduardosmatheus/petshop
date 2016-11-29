@@ -35,8 +35,6 @@ public class EspeciesService {
     public Response findAll() {
         EspeciesDAO dao = new EspeciesDAO();
         List<Especie> especies = dao.all();
-        if(especies.isEmpty())
-            return Response.status(Response.Status.NOT_FOUND).build();
         return Response.ok(especies).build();
     }
    
@@ -50,7 +48,7 @@ public class EspeciesService {
             return Response.status(Response.Status.CREATED)
                 .entity(especie)
                 .build();
-        return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
     
     @PUT
@@ -72,10 +70,8 @@ public class EspeciesService {
         EspeciesDAO dao = new EspeciesDAO();
         Especie r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok("Breed deleted successfully!")
-                .build();
-        return Response.status(Response.Status.NOT_FOUND)
-            .build();
+            return Response.ok("Breed deleted successfully!").build();
+        return Response.noContent().build();
     }
  
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { configureStore } from './store/configureStore';
 import { Root } from './containers/Root';
-import routes from './Routes'
+import routes from './routes'
 
 import './styles/main.scss'
 

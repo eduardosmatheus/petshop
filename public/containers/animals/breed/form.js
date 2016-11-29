@@ -9,8 +9,7 @@ class BreedForm extends Component {
     return (
       <form onSubmit={ this.props.handleSubmit(this.props.action) }>
         <p className="control has-icon has-icon-right">
-          <label className="label">Id</label>
-          <input type="text" className="input" { ...id } readOnly/>
+          <input type="hidden" className="input" { ...id } readOnly/>
           <label className="label">Descrição</label>
         </p>
         <p className="control has-icon has-icon-right">
