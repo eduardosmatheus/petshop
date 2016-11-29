@@ -1,54 +1,56 @@
 package dao;
 
-import db.JpaUtil;
+import db.ConnectionApi;
+import db.Maker;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 import model.Especie;
 
 public class EspeciesDAO implements Persistible<Especie> {
 
-    private EntityManager em = JpaUtil.getInstance().getEntityManager();
+    private static final Maker<Especie> especieMaker =  
+            (conexao) -> new Especie(conexao.get("id", Integer.class), conexao.get("description", String.class));
             
     @Override
     public Especie findOne(int id) {
-        Especie b = em.find(Especie.class, id);
-        return b;
+        ConnectionApi conexao = new ConnectionApi("select * from especies where id = ?", id);
+        conexao.executeQuery();
+        Especie result = conexao.next() ? especieMaker.make(conexao) : null; 
+        return result;
     }
 
     @Override
     public List<Especie> all() {
-        TypedQuery<Especie> q = em.createQuery("from Especie", Especie.class);
-        return q.getResultList();
-    }
-    
-    @Override
-    public Especie update(Especie f) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.merge(f);
-        transaction.commit();
-        return f;
+        ConnectionApi conexao = new ConnectionApi("select * from especies");
+        conexao.executeQuery();
+        List<Especie> especies = new ArrayList<>();
+        while(conexao.next())
+            especies.add(especieMaker.make(conexao));
+        return especies;
     }
 
     @Override
-    public boolean delete(Especie breed) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        Object e = em.merge(breed);
-        em.remove(e);
-        transaction.commit();
-        return findOne(breed.getId()) == null;
+    public boolean create(Especie entity) {
+        ConnectionApi conexao = new ConnectionApi("insert into especies (description) values (?)", entity.getDescription());
+        final int result = conexao.executeUpdate();
+        entity.setId(result);
+        return result > 0;
     }
 
     @Override
-    public boolean create(Especie breed) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(breed);
-        transaction.commit();
-        return findOne(breed.getId()) != null;
+    public Especie update(Especie entity) {
+        ConnectionApi conexao = new ConnectionApi("update especies "
+                + "set description = ? where id = ?", entity.getDescription(), entity.getId());
+        if(conexao.executeUpdate() > 0)
+            return entity;
+        
+        return findOne(entity.getId());
     }
 
+    @Override
+    public boolean delete(Especie entity) {
+        ConnectionApi conexao = new ConnectionApi("delete from especies where id = ?", entity.getId());
+        final int rowsAffected = conexao.executeUpdate(); 
+        return rowsAffected > 0;
+    }
 }

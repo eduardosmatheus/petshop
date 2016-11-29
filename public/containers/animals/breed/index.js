@@ -42,6 +42,7 @@ class Breeds extends Component {
       <div>
         <GridHeader
           openModal={ ()=> {
+            ::this.props.clearActualBreed()
             ::this.props.openModal(this._buildModalStateToAdd())
           }}
           onChangeSearch={ (text) => {::this.props.filterBreed(text)}}

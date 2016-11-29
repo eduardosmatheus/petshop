@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import {CLEAR_ACTUAL_BREED, FETCH_BREEDS, CREATE_BREED,
-  GET_BRRED, UPDATE_BREED, DELETE_BREED,
+  GET_BREED, UPDATE_BREED, DELETE_BREED,
   ERROR, ROOT_URL, errorDispatch} from './'
 
 export const BREEDS_URL = 'breeds'
@@ -18,9 +18,9 @@ export function fetchBreeds() {
 }
 
 export function createBreed(breed) {
-  console.log(breed);
   return dispatch => {
     axios.post(`${ROOT_URL}/${BREEDS_URL}`, breed).then( response => {
+      console.log('Isso vem do server? ' , response.data);
       dispatch({
         type : CREATE_BREED,
         payload : response.data
@@ -33,7 +33,7 @@ export function getBreed(id) {
   return dispatch => {
     axios.get(`${ROOT_URL}/${BREEDS_URL}/${id}`).then( response => {
       dispatch({
-        type :  GET_BRRED,
+        type :  GET_BREED,
         payload : response.data
       })
     }).catch(errorDispatch)
@@ -42,7 +42,7 @@ export function getBreed(id) {
 
 export function updateBreed(breed) {
   return dispatch => {
-    axios.put(`${ROOT_URL}/${BREEDS_URL}/${breed.id}`, breed)
+    axios.put(`${ROOT_URL}/${BREEDS_URL}`, breed)
     .then( response => {
       dispatch({
         type :  UPDATE_BREED,

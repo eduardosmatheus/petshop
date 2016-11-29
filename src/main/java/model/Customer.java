@@ -1,46 +1,34 @@
 package model;
-
-import com.fasterxml.jackson.annotation.JsonView;
+ 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 
 @JsonSerialize
-//@Entity
-public class Customer implements Serializable {
-    
-    @JsonView @Id
-    private String cpf;
-    @JsonView
+public class Customer {
+    private int id;
     private String name;
-    @JsonView
-    private long age;
-    @JsonView
-    private String address;
-    @JsonView
+    private String cpf;
     private String phone;
-    
-    @JsonView @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId
-    private List<Animal> animals = new ArrayList<>();
-    
-    public Customer() {
-    }
-    
-    public String getCpf() {
-        return cpf;
+    private String email;
+
+    public Customer(int id, String name, String cpf, String phone, String email) {
+        this.id = id;
+        this.name = name;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.email = email;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public Customer() {
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -48,23 +36,15 @@ public class Customer implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
-    public long getAge() {
-        return age;
-    }    
 
-    public void setAge(long age) {
-        this.age = age;
+    public String getCpf() {
+        return cpf;
     }
 
-    public String getAddress() {
-        return address;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    
     public String getPhone() {
         return phone;
     }
@@ -72,13 +52,13 @@ public class Customer implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
-    public List<Animal> getAnimals() {
-        return animals;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setAnimals(List<Animal> animals) {
-        this.animals = animals;
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     
