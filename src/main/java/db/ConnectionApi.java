@@ -88,9 +88,7 @@ public class ConnectionApi {
             throw new RuntimeException("Erro ao tentar retornar a coluna " + column +".\n Causa: "+ ex);
         }
     }
-    
-    public void close() { 
-    }
+     
     
     private static Connection openDatabase() {
         try {

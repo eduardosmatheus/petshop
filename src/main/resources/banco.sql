@@ -84,6 +84,7 @@ CREATE TABLE appointments (
   date DATE NULL,
   entryTime BIGINT NULL,
   outTime BIGINT NULL,
+  done integer unsigned not NULL,
   obs  VARCHAR(255) not NULL,
   PRIMARY KEY(id),
   INDEX appointments_FKIndex1(appointment_config_id),

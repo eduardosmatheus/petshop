@@ -17,8 +17,7 @@ public class CustomerDAO implements Persistible<Customer> {
     public Customer findOne(int id) {
         ConnectionApi conexao = new ConnectionApi("select * from customer where id = ?", id);
         conexao.executeQuery();
-        Customer result = conexao.next() ? breedMaker.make(conexao) : null;
-        conexao.close();
+        Customer result = conexao.next() ? breedMaker.make(conexao) : null; 
         return result;
     }
 
@@ -28,16 +27,14 @@ public class CustomerDAO implements Persistible<Customer> {
         conexao.executeQuery();
         List<Customer> breeds = new ArrayList<>();
         while(conexao.next())
-            breeds.add(breedMaker.make(conexao));
-        conexao.close();
+            breeds.add(breedMaker.make(conexao)); 
         return breeds;
     } 
  
     public boolean create(Customer entity) {
         ConnectionApi conexao = new ConnectionApi();
         entity.setId(conexao.executeUpdate("insert into customer (name, cpf, phone, email) values (?,?,?,?)", 
-            entity.getName(), entity.getCpf(), entity.getPhone(), entity.getEmail()));
-        conexao.close();
+            entity.getName(), entity.getCpf(), entity.getPhone(), entity.getEmail())); 
         return entity.getId() > 0;
     }
 
@@ -48,16 +45,14 @@ public class CustomerDAO implements Persistible<Customer> {
             entity.getName(), entity.getCpf(), 
             entity.getPhone(), entity.getEmail(), 
             entity.getId());
-        conexao.executeUpdate();
-        conexao.close();
+        conexao.executeUpdate(); 
         return findOne(entity.getId());
     }
 
     @Override
     public boolean delete(Customer entity) {
         ConnectionApi conexao = new ConnectionApi("delete from customer where id = ?", entity.getId());
-        final int rowsAffected = conexao.executeUpdate();
-        conexao.close();
+        final int rowsAffected = conexao.executeUpdate(); 
         return rowsAffected > 0; 
     }
 }
