@@ -30,7 +30,7 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   let {all, actual} = state
   switch (action.type) {
-    case FETCH_ANIMALS:
+    case FETCH_ANIMALS: 
       return {...state, all : action.payload }
       break
     case CREATE_ANIMAL:

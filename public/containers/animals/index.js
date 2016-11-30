@@ -15,53 +15,60 @@ class Animals extends Component {
 
   componentWillMount() {
     if(!this.props.children) {
-      this.props.fetchAnimals()
-      this.props.fetchEspecies()
-      this.props.fetchBreeds()
-      this.props.fetchCustomers()
+      this.props.fetchAnimals();
+      this.props.fetchEspecies();
+      this.props.fetchBreeds();
+      this.props.fetchCustomers();
     }
   }
 
   _buildModalStateToEdit() {
     return {
       modalTitle : "Editar Animal",
-      contentRender : () => { return (<AnimalForm action={(animal) => {
-        ::this.props.closeModal()
-        ::this.props.updateAnimal(animal)
+      contentRender : () => { return (<AnimalForm action={(param) => {
+        let animal = ::this._buildImmutableAnimal(param);
+        ::this.props.closeModal();
+        ::this.props.updateAnimal(animal);
       }}/>)}
     }
   }
 
+  _buildImmutableAnimal(param) {
+    let { breeds, especies, customers } = this.props
+
+    let animal = Object.assign(param);
+    let breedId = animal.breed;
+    animal.breed = breeds.reduce((acc, current) => {
+      if(current.id == breedId)
+        return current;
+      return acc;
+    }, { id: '' });
+
+    let especieId = animal.especie;
+    animal.especie = especies.reduce((acc, current) => {
+      if(current.id == especieId)
+        return current;
+      return acc;
+    }, { id: '' });
+
+    let customerId = animal.customer;
+    animal.customer = customers.reduce((acc, current) => {
+      if(current.id == customerId)
+        return current
+      return acc;
+    }, { id: '' });
+
+    return animal
+  }
+
+
   _buildModalStateToAdd() {
-    let { breeds, especies, customers } = this.props;
     return {
       modalTitle : "Adicionar Animal",
       contentRender : () => { return (<AnimalForm action={(param) => {
-        let animal = Object.assign(param)
-
-        let breedId = animal.breed;
-        animal.breed = breeds.reduce((acc, current) => {
-          if(current.id == breedId)
-            return current
-          return acc;
-        }, { id: '' })
-        let especieId = animal.especie;
-        animal.especie = especies.reduce((acc, current) => {
-          if(current.id == especieId)
-            return current
-          return acc;
-        }, { id: '' })
-
-        let customerId = animal.customer;
-        animal.customer = customers.reduce((acc, current) => {
-          if(current.id == customerId)
-            return current
-          return acc;
-        }, { id: '' })
-
-        console.log(animal.customer);
-        ::this.props.closeModal()
-        ::this.props.createAnimal(animal)
+        let animal = ::this._buildImmutableAnimal(param);
+        ::this.props.closeModal();
+        ::this.props.createAnimal(animal);
       }}/>)}
     }
   }
@@ -70,13 +77,13 @@ class Animals extends Component {
     if(this.props.children)
       return (<div>{this.props.children}</div>)
 
-    let { all } = this.props.animals
+    let { all } = this.props.animals;
     return  (
       <div>
         <GridHeader
           openModal={ ()=> {
-            ::this.props.clearActualAnimal()
-            ::this.props.openModal(this._buildModalStateToAdd())
+            ::this.props.clearActualAnimal();
+            ::this.props.openModal(this._buildModalStateToAdd());
           }}
           onChangeSearch={ (text) => {::this.props.filterAnimal(text)}}
         />
@@ -87,8 +94,10 @@ class Animals extends Component {
                 <div className="card-content">
                   <div className="media">
                     <div className="media-content">
-                      <h1>  { pet.name }     </h1>
-                      <p>   { pet.customer.name }</p>
+                      <h1>{ pet.name }</h1>
+                      <p>{ pet.customer.name }</p>
+                      <p>{ pet.breed.name }</p>
+                      <p>{ pet.especie.description }</p>
                     </div>
                   </div>
                   <br/>
@@ -98,12 +107,17 @@ class Animals extends Component {
                     <br/>
                     <medium>{ pet.especie.name }</medium>
                     <br/>
-                    <small>Nascimento:<strong> {pet.birth } </strong> </small>
+                    <small>Nascimento:<strong> {new Date(pet.birth).toString("YYYY-MM-DD")} </strong> </small>
                   </div>
                 </div>
                 <footer className="card-footer">
-                  <a className="card-footer-item">Edit</a>
-                  <a className="card-footer-item">Delete</a>
+                  <a className="card-footer-item" onClick={() =>{
+                    ::this.props.getAnimal(pet.id);
+                    ::this.props.openModal(this._buildModalStateToEdit());
+                  }}>Edit</a>
+                  <a className="card-footer-item" onClick={() => {
+                    ::this.props.deleteAnimal(pet)
+                  }}>Delete</a>
                 </footer>
               </div>
             </div> )

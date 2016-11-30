@@ -17,7 +17,7 @@ export function fetchAnimals() {
   }
 }
 
-export function createAnimal(animal) { 
+export function createAnimal(animal) {
   return dispatch => {
     axios.post(`${ROOT_URL}/${ANIMALS_URL}`, animal).then( response => {
       dispatch({
@@ -75,10 +75,17 @@ export function clearActualAnimal() {
 export function filterAnimal(searchString) {
   return dispatch => {
     axios.get(`${ROOT_URL}/${ANIMALS_URL}`).then(response => {
+      console.log(response.data);
       dispatch({
         type : FETCH_ANIMALS,
         payload : response.data.filter((animal) => {
-          return animal.id == searchString || animal.name.indexOf(searchString) != -1 //TODO: mover filtro para consulta no servidor 'FindLike'.
+          console.log('esse: ', animal);
+          return animal.id == searchString
+            || animal.name.indexOf(searchString) != -1
+            || animal.customer.name.indexOf(searchString) != -1 || animal.customer.cpf.indexOf(searchString) != -1
+            || animal.breed.name.indexOf(searchString) != -1
+            || animal.especie.description.indexOf(searchString) != -1
+            || animal.obs.indexOf(searchString) != -1
         })
       })
     }).catch(errorDispatch)

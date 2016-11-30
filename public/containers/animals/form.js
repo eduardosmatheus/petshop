@@ -42,15 +42,15 @@ class AnimalForm extends Component {
         </div>
         <p className="control has-icon has-icon-right">
           <label className="label">Nascimento do Pet:</label>
-          <input type="date" className={`input ${birth.error && birth.touched ? `is-danger` : ``} `} {...birth} maxLength='60'/>
+          <input type="date" className={`input ${birth.error && birth.touched ? `is-danger` : ``} `} {...birth}/>
           {birth.error && birth.touched && <i className="fa fa-warning"></i>}
           {birth.error && birth.touched && <span className="help is-danger">{ birth.error }</span>}
         </p>
         <p className="control has-icon has-icon-right">
           <label className="label">Obs:</label>
-          <textarea className={`textarea ${name.error && name.touched ? `is-danger` : ``} `} {...obs} maxLength='60'/>
-          {name.error && name.touched && <i className="fa fa-warning"></i>}
-          {name.error && name.touched && <span className="help is-danger">{ name.error }</span>}
+          <textarea className={`textarea ${obs.error && obs.touched ? `is-danger` : ``} `} {...obs} maxLength='250'/>
+          {obs.error && obs.touched && <i className="fa fa-warning"></i>}
+          {obs.error && obs.touched && <span className="help is-danger">{ obs.error }</span>}
         </p>
         <p className="control">
           <button type="submit"  className="button is-primary">Gravar</button>

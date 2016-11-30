@@ -11,7 +11,7 @@ public class AnimalDAO implements Persistible<Animal> {
 
     private static final Maker<Animal> animalMaker = (conexao) -> {
         return Animal.buildAnimal(conexao.get("id", Integer.class),conexao.get("name", String.class), conexao.get("birth", Date.class),
-            conexao.get("breeds_id", Integer.class), conexao.get("especies_id", Integer.class), conexao.get("customer_id", Integer.class));
+            conexao.get("breeds_id", Integer.class), conexao.get("especies_id", Integer.class), conexao.get("customer_id", Integer.class), conexao.get("obs", String.class));
     }; 
 
     @Override

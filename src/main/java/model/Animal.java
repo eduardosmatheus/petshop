@@ -86,7 +86,7 @@ public class Animal implements Serializable {
         this.obs = obs;
     }
     
-    public static Animal buildAnimal(int id, String name, Date birth, int idBreed, int idEspecie, int idCustomer) {
+    public static Animal buildAnimal(int id, String name, Date birth, int idBreed, int idEspecie, int idCustomer, String obs) {
         Animal animal = new Animal();
         animal.setId(id);
         animal.setName(name);
@@ -94,6 +94,7 @@ public class Animal implements Serializable {
         animal.setBreed(new BreedsDAO().findOne(idBreed));
         animal.setEspecie(new EspeciesDAO().findOne(idEspecie));
         animal.setCustomer(new CustomerDAO().findOne(idCustomer));
+        animal.setObs(obs);
         return animal;
     }
 }
