@@ -55,7 +55,8 @@ public class BreedsService {
             .build(); 
     }
     
-    @PUT 
+    @PUT
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response put(Breed newRace) {

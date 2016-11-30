@@ -26,8 +26,9 @@ public class ConnectionApi {
         try {
             stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             List<Object> p = Arrays.asList(params);
+            int i = 0;
             for (Object param : p) {
-                stmt.setObject(p.indexOf(param) + 1, param);
+                stmt.setObject(++i, param);
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -58,8 +59,9 @@ public class ConnectionApi {
         try { 
             stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             List<Object> p = Arrays.asList(params);
+            int i = 0;
             for (Object param : p) {
-                stmt.setObject(p.indexOf(param) + 1, param);
+                stmt.setObject(++i, param);
             }
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();

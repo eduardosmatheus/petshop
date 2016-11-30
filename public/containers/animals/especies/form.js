@@ -8,12 +8,11 @@ class EspecieForm extends Component {
     let { fields : { id, description } } = this.props
     return (
       <form onSubmit={ this.props.handleSubmit(this.props.action) }>
-        <p className="control has-icon has-icon-right">
-          <label className="label">Id</label>
-          <input type="text" className="input" { ...id } readOnly/>
-          <label className="label">Descrição</label>
+        <p className="control has-icon has-icon-right">          
+          <input type="hidden" className="input" { ...id } readOnly/>
         </p>
         <p className="control has-icon has-icon-right">
+          <label className="label">Descrição</label>
           <input type="text" className={`input ${description.error && description.touched ? `is-danger` : ``} `} {...description} maxLength='60'/>
           {description.error && description.touched && <i className="fa fa-warning"></i>}
           {description.error && description.touched && <span className="help is-danger">{ description.error }</span>}
