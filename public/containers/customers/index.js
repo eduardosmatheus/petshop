@@ -51,10 +51,18 @@ class Customers extends Component {
           {this.props.customer.all.map(( customer ) => {
             return (<div className="column is-one-third area-item animal-card" key={customer.id}>
                 <div className="card is-fullwidth">
+                <header className="card-header">
+                  <p className="card-header-title">
+                    { customer.name }
+                 </p>
+                </header>
                   <div className="card-content">
                     <div className="media">
                       <div className="media-content">
-                        <p>{ customer.name }</p>
+                        <p>CPF: { customer.cpf }</p>
+                        <i className="fa fa-phone" aria-hidden="true"/> { customer.phone }
+                        <br/>
+                        <i className="fa fa-envelope" aria-hidden="true"/>{ customer.email }
                       </div>
                     </div>
                   </div>

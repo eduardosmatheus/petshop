@@ -37,7 +37,7 @@ class AnimalForm extends Component {
           <label className="label">Proprietário do Pet:</label>
           <Select
             {...customer}
-            options={customers.map((customer) => {  return {value: customer.id, label: ('' + customer.name + '/' + customer.cpf + '')} } )}
+            options={customers.map((customer) => {  return {value: customer.id, label: ('' + customer.name + '/ ' + customer.cpf + '')} } )}
             onBlur={() => customer.onBlur(customer.value)}/>
         </div>
         <p className="control has-icon has-icon-right">
@@ -61,11 +61,12 @@ class AnimalForm extends Component {
 }
 
 function mapStateToProps(state) {
+  let { actual } = state.animalsState;
   return {
     breeds : state.breedState.all,
     especies : state.especieState.all,
     customers : state.customerState.all,
-    initialValues : state.animalsState.actual
+    initialValues : { ...actual, breed: actual.breed.id, customer: actual.customer.id, especie: actual.especie.id}
   }
 }
 

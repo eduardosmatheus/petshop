@@ -24,6 +24,12 @@ h1, h2, strong {
   color: #777777;
 }
 
+.media-content {
+  i {
+    padding-right: 5px;
+  }
+}
+
 .app-title {
   text-align: center;
   font-size: xx-large;
@@ -82,7 +88,7 @@ h1, h2, strong {
 
 .applicationContainer {
 
-  .card { 
+  .card {
   }
 
   .search-icon-content {

@@ -91,21 +91,18 @@ class Animals extends Component {
           {all.map((pet, i) => {
             return ( <div key={pet.id} className="column is-one-third area-item animal-card">
               <div className="card is-fullwidth">
+                <header className="card-header">
+                  <p className="card-header-title">
+                    { pet.name }
+                 </p>
+               </header>
                 <div className="card-content">
-                  <div className="media">
-                    <div className="media-content">
-                      <h1>{ pet.name }</h1>
-                      <p>{ pet.customer.name }</p>
-                      <p>{ pet.breed.name }</p>
-                      <p>{ pet.especie.description }</p>
-                    </div>
-                  </div>
                   <br/>
                   <div className="content">
+                    <p>Dono: { pet.customer.name }</p>
+                    <p>Raça: { pet.breed.name }</p>
+                    <p>Especie: { pet.especie.description }</p>
                     {pet.obs && <blockquotes> { pet.obs } </blockquotes>}
-                    <br/>
-                    <br/>
-                    <medium>{ pet.especie.name }</medium>
                     <br/>
                     <small>Nascimento:<strong> {new Date(pet.birth).toString("YYYY-MM-DD")} </strong> </small>
                   </div>
