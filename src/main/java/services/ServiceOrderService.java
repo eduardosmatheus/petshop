@@ -14,7 +14,7 @@ import model.Appointment;
 import dao.AppointmentDAO;
 import java.util.List;
 
-@Path("appointments")
+@Path("orders")
 public class ServiceOrderService { 
     
     @GET
