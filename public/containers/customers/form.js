@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { reduxForm, change as changeFieldValue } from 'redux-form'
-
+import InputElement from 'react-input-mask'
 
 class CustomerForm extends Component {
 
@@ -19,13 +19,13 @@ class CustomerForm extends Component {
         </p>
         <p className="control has-icon has-icon-right">
           <label className="label">CPF</label>
-          <input type="text" className={`input ${cpf.error && cpf.touched ? `is-danger` : ``} `} {...cpf} maxLength='60'/>
+          <InputElement mask="999.999.999-99" className={`input ${cpf.error && cpf.touched ? `is-danger` : ``} `} {...cpf} maxLength='60'/>
           {cpf.error && cpf.touched && <i className="fa fa-warning"></i>}
           {cpf.error && cpf.touched && <span className="help is-danger">{ cpf.error }</span>}
         </p>
         <p className="control has-icon has-icon-right">
           <label className="label">Telefone</label>
-          <input type="text" className={`input ${phone.error && phone.touched ? `is-danger` : ``} `} {...phone} maxLength='60'/>
+          <InputElement mask="(99) 9999-9999" className={`input ${phone.error && phone.touched ? `is-danger` : ``} `} {...phone} maxLength='60'/>
           {phone.error && phone.touched && <i className="fa fa-warning"></i>}
           {phone.error && phone.touched && <span className="help is-danger">{ phone.error }</span>}
         </p>

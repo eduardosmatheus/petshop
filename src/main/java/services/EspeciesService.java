@@ -70,7 +70,7 @@ public class EspeciesService {
         EspeciesDAO dao = new EspeciesDAO();
         Especie r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok("Breed deleted successfully!").build();
+            return Response.ok("Raça removida com sucesso!").build();
         return Response.noContent().build();
     }
  

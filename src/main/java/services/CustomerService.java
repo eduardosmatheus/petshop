@@ -38,7 +38,8 @@ public class CustomerService {
         if(r != null)
             return Response.ok(r, MediaType.APPLICATION_JSON)
                     .build();
-        return Response.status(Response.Status.NOT_FOUND).build(); 
+        return Response.status(Response.Status.NOT_FOUND)
+                .build(); 
     }
     
     @POST
@@ -74,9 +75,10 @@ public class CustomerService {
         CustomerDAO dao = new CustomerDAO(); 
         Customer r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok("Customer deleted successfully!")
+            return Response.ok("Cliente removido com sucesso!")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
+                .entity("Cliente não encontrado!")
             .build();
     }
     

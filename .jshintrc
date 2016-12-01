@@ -1,4 +1,4 @@
-rules: {
+{
     "esversion": 6,
     "asi" : "true"
 }
