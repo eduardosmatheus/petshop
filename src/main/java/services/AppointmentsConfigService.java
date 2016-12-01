@@ -75,7 +75,7 @@ public class AppointmentsConfigService {
         AppointmentConfigDAO dao = new AppointmentConfigDAO(); 
         AppointmentConfig r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok("AppointmentConfig deleted successfully!")
+            return Response.ok("Configurações de agendamento removidas com sucesso!")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
             .build();

@@ -77,7 +77,7 @@ public class BreedsService {
         BreedsDAO dao = new BreedsDAO(); 
         Breed r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok("Breed deleted successfully!")
+            return Response.ok("Raça removida com sucesso!")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
             .build();

@@ -74,7 +74,7 @@ public class AppointmentsService {
         AppointmentDAO dao = new AppointmentDAO(); 
         Appointment r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok("Appointment deleted successfully!")
+            return Response.ok("Agendamento removido com sucesso!")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
             .build();

@@ -74,7 +74,7 @@ public class ItensService {
         ItemDAO dao = new ItemDAO(); 
         Item r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok("Item deleted successfully!")
+            return Response.ok("Item da ordem de serviço removido com sucesso!")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
             .build();

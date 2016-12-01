@@ -68,7 +68,7 @@ public class AnimalsService {
         AnimalDAO dao = new AnimalDAO(); 
         Animal r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok("Animal deleted successfully!")
+            return Response.ok("Animal removido com sucesso!")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
             .build();

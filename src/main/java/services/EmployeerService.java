@@ -74,7 +74,7 @@ public class EmployeerService {
         EmployeerDAO dao = new EmployeerDAO(); 
         Employeer r = dao.findOne(id);
         if(dao.delete(r))
-            return Response.ok("Employeer deleted successfully!")
+            return Response.ok("Empregado removido com sucesso!")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
             .build();
