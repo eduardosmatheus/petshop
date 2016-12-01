@@ -22,8 +22,8 @@ public class ServiceOrder implements Serializable {
         this.itens = itens;
         this.accessKey = accessKey;
         this.price = price;
-    }
-  
+    } 
+    
     public Integer getId() {
         return id;
     }

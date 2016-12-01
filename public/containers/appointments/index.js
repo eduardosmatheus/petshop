@@ -61,6 +61,7 @@ class Appointments extends Component {
   render() {
     let { pathname } = this.props.location
     return (<div>
+              <h3 className="title is-3">Recursos Humanos</h3>
               <div className="tabs is-centered is-boxed is-medium">
                 <ul>
                   <li className={pathname == '/appointments' ? 'is-active' : ''}>

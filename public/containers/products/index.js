@@ -40,6 +40,7 @@ class Products extends Component {
   render() {
     return (
       <div>
+        <h3 className="title is-3">Produtos</h3>
         <GridHeader
           openModal={ ()=> {
             ::this.props.clearActualProduct()

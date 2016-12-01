@@ -54,6 +54,8 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const CLEAR_ACTUAL_PRODUCT = 'CLEAR_ACTUAL_PRODUCT'
 
+export const BILLING_TOTALS = 'BILLING_TOTALS'
+
 export const ERROR = 'ERROR'
 export const ROOT_URL = 'http://localhost:8080/PetshopWebApi'
 export const errorDispatch = ((err) => ({ type : ERROR, error : err })  )

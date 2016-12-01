@@ -40,6 +40,7 @@ class Customers extends Component {
   render() {
     return (
       <div>
+        <h3 className="title is-3">Ordens de Serviço</h3>
         <GridHeader
           openModal={ ()=> {
             ::this.props.clearActualCustomer()

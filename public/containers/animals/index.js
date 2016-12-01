@@ -127,6 +127,7 @@ class Animals extends Component {
   render() {
     let { pathname } = this.props.location
     return (<div>
+              <h3 className="title is-3">Pets</h3>
               <div className="tabs is-centered is-boxed is-medium">
                 <ul>
                   <li className={pathname == '/animals' ? 'is-active' : ''}>

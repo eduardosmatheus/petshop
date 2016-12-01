@@ -7,6 +7,7 @@ import OrderReducer from './reducerOrder'
 import EmployeerReducer from './reducerEmployeer'
 import AppointmentReducer from './reducerAppointment'
 import ProductReducer from './reducerProduct'
+import DashboardReducer from './reducerDashboard'
 import CustomerReducer from './reducerCustomer'
 
 import ModalReducer from './reducerModal'
@@ -22,8 +23,9 @@ const rootReducer = combineReducers({
   employeersState: EmployeerReducer,
   appointmentsState: AppointmentReducer,
   productsState: ProductReducer,
+  dashboardsState : DashboardReducer,
   form: formReducer,
-  modal: ModalReducer,
+  modal: ModalReducer
 })
 
 export default rootReducer
