@@ -7,6 +7,9 @@ import NotFound from './components/NotFound'
 
 import Animals from './containers/animals'
 import Customers from './containers/customers'
+import Employeers from './containers/appointments/employeers'
+import Appointments from './containers/appointments'
+import Orders from './containers/orders'
 import Breeds from './containers/animals/breed/'
 import Especies from './containers/animals/especies/'
 
@@ -14,6 +17,10 @@ export default (
   <Route path='/' component={App} >
     <IndexRoute component={MenuApp} />
     <Route path='customers' component={Customers} />
+    <Route path='appointments' component={Appointments} >
+      <Route path='employeers' component={Employeers} />
+    </Route>
+    <Route path='orders' component={Orders} />
     <Route path='animals' component={Animals} >
       <Route path='breeds' component={Breeds} />
       <Route path='especies' component={Especies} />

@@ -6,8 +6,8 @@ import java.io.Serializable;
 @JsonSerialize
 public class AppointmentConfig implements Serializable {
 
-    private Integer id;  
-    private Employeer employeer;
+    private Integer id;   
+    private int employeers_id;
     private long entryTime;
     private long lunchTime;
     private long entryTimeAfterLunch;
@@ -15,31 +15,23 @@ public class AppointmentConfig implements Serializable {
 
     public AppointmentConfig() {
     }
- 
-    public Integer getId() {
-        return id;
-    }
 
-    public AppointmentConfig(Integer id, Employeer employeer, long entryTime, long lunchTime, long entryTimeAfterLunch, long homeTime) {
+    public AppointmentConfig(Integer id, int employeers_id, long entryTime, long lunchTime, long entryTimeAfterLunch, long homeTime) {
         this.id = id;
-        this.employeer = employeer;
+        this.employeers_id = employeers_id;
         this.entryTime = entryTime;
         this.lunchTime = lunchTime;
         this.entryTimeAfterLunch = entryTimeAfterLunch;
         this.homeTime = homeTime;
     }
  
+    public Integer getId() {
+        return id;
+    }
+ 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Employeer getEmployeer() {
-        return employeer;
-    }
-
-    public void setEmployeer(Employeer employeer) {
-        this.employeer = employeer;
-    }
+    } 
 
     public long getEntryTime() {
         return entryTime;
@@ -71,6 +63,15 @@ public class AppointmentConfig implements Serializable {
 
     public void setHomeTime(long homeTime) {
         this.homeTime = homeTime;
+    }
+
+    public int getEmployeers_id() {
+        return employeers_id;
+    }
+
+    public void setEmployeers_id(int employeers_id) {
+        setId(employeers_id);
+        this.employeers_id = employeers_id;
     }
     
     

@@ -26,7 +26,7 @@ export default class MenuApp extends Component {
                 <Link className="tile is-child menu-item" to="/orders" style={{backgroundColor : '#00B89C'}}>
                   <div className="menu-item-content">
                     <i className="fa fa-cogs fa-5x"/>
-                    <p className="title menu-app-description">Ordem de serviço</p>
+                    <p className="title menu-app-description">Ordens de serviço</p>
                   </div>
                 </Link>
               </div>
@@ -44,7 +44,7 @@ export default class MenuApp extends Component {
             <Link className="tile is-child menu-item" to="/animals"  style={{backgroundColor : '#0AC53F'}}>
               <div className="menu-item-content">
                 <i className="fa fa-qq fa-5x"/>
-                <p className="title menu-app-description">Animais</p> 
+                <p className="title menu-app-description">Animais</p>
               </div>
             </Link>
             <Link className="tile is-child menu-item" to="/dashboards" style={{backgroundColor : '#0A4CC5'}}>

@@ -3,7 +3,7 @@ package dao;
 import db.ConnectionApi;
 import db.Maker;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; 
 import model.Employeer;
 
 public class EmployeerDAO implements Persistible<Employeer> {
@@ -11,7 +11,8 @@ public class EmployeerDAO implements Persistible<Employeer> {
     private static final Maker<Employeer> employeerMaker =  
             (conexao) -> new Employeer(conexao.get("id", Integer.class), conexao.get("name", String.class),
              conexao.get("cpf", String.class), conexao.get("phone", String.class),
-                conexao.get("email", String.class));
+                conexao.get("email", String.class),
+            new AppointmentConfigDAO().findOne(conexao.get("id", Integer.class)));
             
     @Override
     public Employeer findOne(int id) {
