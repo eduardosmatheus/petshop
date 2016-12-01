@@ -17,7 +17,7 @@ class Employeers extends Component {
 
   _buildModalStateToEdit() {
     return {
-      modalTitle : "Editar Cliente",
+      modalTitle : "Editar Empregado",
       contentRender : () => { return (<EmployeerForm action={(employeer) => {
         ::this.props.closeModal()
         ::this.props.updateEmployeer(employeer)
@@ -28,7 +28,7 @@ class Employeers extends Component {
 
   _buildModalStateToAdd() {
     return {
-      modalTitle : "Adicionar Cliente",
+      modalTitle : "Adicionar Empregado",
       contentRender : () => { return (<EmployeerForm action={(employeer) => {
         ::this.props.closeModal()
         ::this.props.createEmployeer(employeer)

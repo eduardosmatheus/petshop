@@ -36,7 +36,12 @@ public class EmployeerDAO implements Persistible<Employeer> {
         ConnectionApi conexao = new ConnectionApi();
         entity.setId(conexao.executeUpdate("insert into employeer (name, cpf, phone, email) values (?,?,?,?)", 
             entity.getName(), entity.getCpf(), entity.getPhone(), entity.getEmail())); 
-        return entity.getId() > 0;
+        entity.getAppointmentConfig().setEmployeers_id(entity.getId());
+        if(entity.getId() > 0) {
+            AppointmentConfigDAO apDAO = new AppointmentConfigDAO();
+            return apDAO.create(entity.getAppointmentConfig());
+        }
+        return false;
     }
 
     @Override
@@ -47,11 +52,16 @@ public class EmployeerDAO implements Persistible<Employeer> {
             entity.getPhone(), entity.getEmail(), 
             entity.getId());
         conexao.executeUpdate(); 
+        AppointmentConfigDAO apDao = new AppointmentConfigDAO();
+        apDao.update(entity.getAppointmentConfig());
         return findOne(entity.getId());
     }
 
     @Override
     public boolean delete(Employeer entity) {
+        AppointmentConfigDAO apDao = new AppointmentConfigDAO();
+        apDao.delete(entity.getAppointmentConfig());
+        
         ConnectionApi conexao = new ConnectionApi("delete from employeer where id = ?", entity.getId());
         final int rowsAffected = conexao.executeUpdate(); 
         return rowsAffected > 0; 

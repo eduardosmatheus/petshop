@@ -34,7 +34,7 @@ public class AppointmentConfigDAO implements Persistible<AppointmentConfig> {
     public boolean create(AppointmentConfig entity) {
         ConnectionApi conexao = new ConnectionApi();
         entity.setId(conexao.executeUpdate("insert into appointment_config (employeer_id, entryTime, lunchTime, entryTimeAfterLunch, homeTime) "
-            + "values (?,?,?,?,?)",
+            + "values (?,?,?,?,?)", entity.getEmployeers_id(),
             entity.getEntryTime(), entity.getLunchTime(), 
             entity.getEntryTimeAfterLunch(), entity.getHomeTime())); 
         return entity.getId() > 0;
@@ -45,14 +45,15 @@ public class AppointmentConfigDAO implements Persistible<AppointmentConfig> {
         ConnectionApi conexao = new ConnectionApi("update appointment_config "
                 + "set entryTime=?, lunchTime=?, entryTimeAfterLunch=?, homeTime=? where employeer_id = ?",
             entity.getEntryTime(), entity.getLunchTime(), 
-            entity.getEntryTimeAfterLunch(), entity.getHomeTime());
+            entity.getEntryTimeAfterLunch(), entity.getHomeTime(), 
+            entity.getEmployeers_id());
         conexao.executeUpdate(); 
-        return findOne(entity.getId());
+        return findOne(entity.getEmployeers_id());
     }
 
     @Override
     public boolean delete(AppointmentConfig entity) {
-        ConnectionApi conexao = new ConnectionApi("delete from appointment_config where employeer_id = ?", entity.getId());
+        ConnectionApi conexao = new ConnectionApi("delete from appointment_config where employeer_id = ?", entity.getEmployeers_id());
         final int rowsAffected = conexao.executeUpdate(); 
         return rowsAffected > 0; 
     }

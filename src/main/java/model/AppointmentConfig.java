@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class AppointmentConfig implements Serializable {
 
     private Integer id;   
-    private int employeers_id;
+    private Integer employeers_id;
     private long entryTime;
     private long lunchTime;
     private long entryTimeAfterLunch;
@@ -69,8 +69,7 @@ public class AppointmentConfig implements Serializable {
         return employeers_id;
     }
 
-    public void setEmployeers_id(int employeers_id) {
-        setId(employeers_id);
+    public void setEmployeers_id(Integer employeers_id) { 
         this.employeers_id = employeers_id;
     }
     

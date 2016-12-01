@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { parseTimeStringFormatToMillisecods } from '../dateParser';
+
 import {CLEAR_ACTUAL_EMPLOYEER, FETCH_EMPLOYEERS, CREATE_EMPLOYEER,
   GET_EMPLOYEER, UPDATE_EMPLOYEER, DELETE_EMPLOYEER,
   ERROR, ROOT_URL, errorDispatch} from './'
@@ -17,7 +19,28 @@ export function fetchEmployeers() {
   }
 }
 
+function _parserFormToState(employeerForm) {
+  return {
+      id : employeerForm.id,
+      name : employeerForm.name,
+      cpf : employeerForm.cpf,
+      phone : employeerForm.phone,
+      email : employeerForm.email,
+      appointmentConfig: {
+        id: '',
+        employeers_id: employeerForm.id,
+        entryTime: parseTimeStringFormatToMillisecods(employeerForm.entryTime),
+        lunchTime:  parseTimeStringFormatToMillisecods(employeerForm.lunchTime),
+        entryTimeAfterLunch:  parseTimeStringFormatToMillisecods(employeerForm.entryTimeAfterLunch),
+        homeTime:  parseTimeStringFormatToMillisecods(employeerForm.homeTime)
+      }
+  };
+}
+
 export function createEmployeer(employeer) {
+
+  employeer = _parserFormToState(employeer);
+  console.log('employeer::: '  , employeer);
   return dispatch => {
     axios.post(`${ROOT_URL}/${EMPLOYEERS_URL}`, employeer).then( response => {
       dispatch({
@@ -40,6 +63,7 @@ export function getEmployeer(id) {
 }
 
 export function updateEmployeer(employeer) {
+  employeer = _parserFormToState(employeer);
   return dispatch => {
     axios.put(`${ROOT_URL}/${EMPLOYEERS_URL}`, employeer)
     .then( response => {

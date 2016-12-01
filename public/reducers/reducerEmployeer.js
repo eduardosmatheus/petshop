@@ -5,14 +5,14 @@ import { CLEAR_ACTUAL_EMPLOYEER, FETCH_EMPLOYEERS, CREATE_EMPLOYEER,
 const INITIAL_STATE = {
   all : [],
   actual : {
-    id : '',
+    id : 0,
     name : '',
     cpf : '',
     phone : '',
     email : '',
     appointmentConfig: {
-      id: '',
-      employeers_id: '',
+      id: 0,
+      employeers_id: 0,
       entryTime: 0,
       lunchTime: 0,
       entryTimeAfterLunch: 0,

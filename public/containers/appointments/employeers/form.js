@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
-import { reduxForm, change as changeFieldValue } from 'redux-form'
+import React, { Component } from 'react';
+import { reduxForm, change as changeFieldValue } from 'redux-form';
+import InputElement from 'react-input-mask';
 
+import { parseMillisecodsToTimeStringFormat } from '../../../dateParser';
 
 class EmployeerForm extends Component {
 
@@ -19,13 +21,13 @@ class EmployeerForm extends Component {
         </p>
         <p className="control has-icon has-icon-right">
           <label className="label">CPF</label>
-          <input type="text" className={`input ${cpf.error && cpf.touched ? `is-danger` : ``} `} {...cpf} maxLength='60'/>
+          <InputElement mask="999.999.999-99" className={`input ${cpf.error && cpf.touched ? `is-danger` : ``} `} {...cpf} maxLength='60'/>
           {cpf.error && cpf.touched && <i className="fa fa-warning"></i>}
           {cpf.error && cpf.touched && <span className="help is-danger">{ cpf.error }</span>}
         </p>
         <p className="control has-icon has-icon-right">
           <label className="label">Telefone</label>
-          <input type="text" className={`input ${phone.error && phone.touched ? `is-danger` : ``} `} {...phone} maxLength='60'/>
+          <InputElement mask="(999) 99999-9999" className={`input ${phone.error && phone.touched ? `is-danger` : ``} `} {...phone} maxLength='60'/>
           {phone.error && phone.touched && <i className="fa fa-warning"></i>}
           {phone.error && phone.touched && <span className="help is-danger">{ phone.error }</span>}
         </p>
@@ -68,8 +70,19 @@ class EmployeerForm extends Component {
 }
 
 function mapStateToProps(state) {
+  let { actual } = state.employeersState;
   return {
-    initialValues : state.employeersState.actual
+    initialValues : {
+      id : actual.id,
+      name : actual.name,
+      cpf : actual.cpf,
+      phone : actual.phone,
+      email : actual.email,
+      entryTime: parseMillisecodsToTimeStringFormat(actual.appointmentConfig.entryTime),
+      lunchTime: parseMillisecodsToTimeStringFormat(actual.appointmentConfig.lunchTime),
+      entryTimeAfterLunch: parseMillisecodsToTimeStringFormat(actual.appointmentConfig.entryTimeAfterLunch),
+      homeTime: parseMillisecodsToTimeStringFormat(actual.appointmentConfig.homeTime)
+    }
   }
 }
 
@@ -78,7 +91,7 @@ export default reduxForm({
   fields : ['id', 'name', 'cpf', 'phone', 'email',  'entryTime', 'lunchTime', 'entryTimeAfterLunch', 'homeTime'],
   validate : (values) => {
     let error = {}
-
+  
     if(!values.name)
       error.name = 'Informe o nome do empregado!'
 
@@ -90,6 +103,18 @@ export default reduxForm({
 
     if(!values.email)
       error.email = 'Informe o e-mail do empregado!'
+
+    if(!values.entryTime)
+      error.entryTime = 'Informe o horário do inicio do expediente do empregado!'
+
+    if(!values.lunchTime)
+      error.lunchTime = 'Informe o horário para saída do almoço do empregado!'
+
+    if(!values.entryTimeAfterLunch)
+      error.entryTimeAfterLunch = 'Informe o horário de retorno do almoço do empregado!'
+
+    if(!values.homeTime)
+      error.homeTime = 'Informe o horário do fim do expediente do empregado!'
 
     return error;
   }
