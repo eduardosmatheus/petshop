@@ -12,6 +12,7 @@ import Appointments from './containers/appointments'
 import Orders from './containers/orders'
 import Breeds from './containers/animals/breed/'
 import Especies from './containers/animals/especies/'
+import Dashboard from './containers/dashboards/'
 
 export default (
   <Route path='/' component={App} >
@@ -25,6 +26,7 @@ export default (
       <Route path='breeds' component={Breeds} />
       <Route path='especies' component={Especies} />
     </Route>
+    <Route path='dashboards' component={Dashboard}/>
     <Route path="*" component={NotFound}/>
   </Route>
 )

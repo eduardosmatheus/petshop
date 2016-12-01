@@ -58,5 +58,12 @@ public class ServiceOrderDAO implements Persistible<ServiceOrder> {
         final int rowsAffected = conexao.executeUpdate(); 
         return rowsAffected > 0;
     }
+    
+    public double somatoriaDeLucros() {
+        ConnectionApi conexao = new ConnectionApi("select sum(price) somatoria from service_order");
+        conexao.executeQuery();
+        double result = conexao.next() ? conexao.get("somatoria", Double.class) : 0d;
+        return result;
+    }
      
 }
