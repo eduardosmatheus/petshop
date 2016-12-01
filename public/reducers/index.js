@@ -6,7 +6,7 @@ import AnimalsReducer from './reducerAnimals'
 import OrderReducer from './reducerOrder'
 import EmployeerReducer from './reducerEmployeer'
 import AppointmentReducer from './reducerAppointment'
-
+import ProductReducer from './reducerProduct'
 import CustomerReducer from './reducerCustomer'
 
 import ModalReducer from './reducerModal'
@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
   ordersState: OrderReducer,
   employeersState: EmployeerReducer,
   appointmentsState: AppointmentReducer,
+  productsState: ProductReducer,
   form: formReducer,
   modal: ModalReducer,
 })

@@ -7,6 +7,7 @@ import { Link } from 'react-router'
 import EmployeerForm from './form'
 import GridHeader from '../../../components/GridHeader'
 
+import { parseMillisecodsToTimeStringFormat } from '../../../dateParser'
 
 class Employeers extends Component {
 
@@ -38,6 +39,7 @@ class Employeers extends Component {
   }
 
   render() {
+    console.log(this.props.employeer.all);
     return (
       <div>
         <GridHeader
@@ -63,6 +65,11 @@ class Employeers extends Component {
                         <i className="fa fa-phone" aria-hidden="true"/> { employeer.phone }
                         <br/>
                         <i className="fa fa-envelope" aria-hidden="true"/>{ employeer.email }
+                        <p>Horário de inicio: { parseMillisecodsToTimeStringFormat(employeer.appointmentConfig.entryTime) }</p>
+                        <p>Saída almoço: { parseMillisecodsToTimeStringFormat(employeer.appointmentConfig.lunchTime) }</p>
+                        <p>Volta do almoço: { parseMillisecodsToTimeStringFormat(employeer.appointmentConfig.entryTimeAfterLunch) }</p>
+                        <p>Fim expediente: { parseMillisecodsToTimeStringFormat(employeer.appointmentConfig.homeTime) }</p>
+
                       </div>
                     </div>
                   </div>

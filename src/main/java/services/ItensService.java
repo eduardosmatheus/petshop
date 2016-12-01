@@ -14,7 +14,7 @@ import model.Item;
 import dao.ItemDAO;
 import java.util.List;
 
-@Path("itens")
+@Path("products")
 public class ItensService {
       
     @GET
@@ -52,8 +52,7 @@ public class ItensService {
             .build(); 
     }
     
-    @PUT
-    @Path("/{id}")
+    @PUT 
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response put(Item item) {

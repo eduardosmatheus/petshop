@@ -11,6 +11,7 @@ import Employeers from './containers/appointments/employeers'
 import Appointments from './containers/appointments'
 import Orders from './containers/orders'
 import Breeds from './containers/animals/breed/'
+import Products from './containers/products/'
 import Especies from './containers/animals/especies/'
 
 export default (
@@ -21,6 +22,7 @@ export default (
       <Route path='employeers' component={Employeers} />
     </Route>
     <Route path='orders' component={Orders} />
+    <Route path='products' component={Products} />
     <Route path='animals' component={Animals} >
       <Route path='breeds' component={Breeds} />
       <Route path='especies' component={Especies} />

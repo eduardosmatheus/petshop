@@ -47,6 +47,13 @@ export const UPDATE_APPOINTMENT = 'UPDATE_APPOINTMENT'
 export const DELETE_APPOINTMENT = 'DELETE_APPOINTMENT'
 export const CLEAR_ACTUAL_APPOINTMENT = 'CLEAR_ACTUAL_APPOINTMENT'
 
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS'
+export const CREATE_PRODUCT = 'CREATE_PRODUCT'
+export const GET_PRODUCT = 'GET_PRODUCT'
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
+export const CLEAR_ACTUAL_PRODUCT = 'CLEAR_ACTUAL_PRODUCT'
+
 export const ERROR = 'ERROR'
 export const ROOT_URL = 'http://localhost:8080/PetshopWebApi'
 export const errorDispatch = ((err) => ({ type : ERROR, error : err })  )
