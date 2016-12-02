@@ -11,9 +11,9 @@ import javax.ws.rs.core.Response;
 public class DashboardService {
 
     @GET
-    @Path("/billingTotals")
+    @Path("/totalPayments")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response fetchBillingTotals() {
+    public Response fetchTotalPayments() {
         ServiceOrderDAO dao = new ServiceOrderDAO();
         double respons = dao.somatoriaDeLucros();
         return Response.ok(respons).build();

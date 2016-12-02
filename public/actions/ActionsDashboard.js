@@ -1,14 +1,14 @@
 import axios from 'axios'
 
-import { BILLING_TOTALS, ERROR, ROOT_URL, errorDispatch } from './'
+import { TOTAL_PAYMENTS, ERROR, ROOT_URL, errorDispatch } from './'
 
 const DASHBOARD_URL = 'dashboards'
 
-export function fetchBillingTotals() {
+export function fetchTotalPayments() {
   return dispatch => {
-    axios.get(`${ROOT_URL}/${DASHBOARD_URL}/billingTotals`).then(response => {
+    axios.get(`${ROOT_URL}/${DASHBOARD_URL}/totalPayments`).then(response => {
       dispatch({
-        type : BILLING_TOTALS,
+        type : TOTAL_PAYMENTS,
         payload : response.data
       })
     }).catch(errorDispatch)
