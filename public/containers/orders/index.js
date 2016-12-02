@@ -57,20 +57,27 @@ class Orders extends Component {
         />
         <div className="columns is-multiline">
           {this.props.order.all.map(( order ) => {
-            return (<div className="column is-one-third area-item animal-card" key={order.id}>
+            let { employeers_id } = order.appointment.appointmentConfig;
+            let employeer = this.props.employeer.all.reduce((acc, act) => {
+              if(employeers_id == act.id)
+                return act;
+              return acc;
+            });
+            return (<div className="column is-half area-item animal-card" key={order.id}>
                 <div className="card is-fullwidth">
                 <header className="card-header">
                   <p className="card-header-title">
-                    { order.name }
+                    { order.accessKey }
                  </p>
                 </header>
                   <div className="card-content">
                     <div className="media">
                       <div className="media-content">
-                        <p>CPF: { order.cpf }</p>
-                        <i className="fa fa-phone" aria-hidden="true"/> { order.phone }
-                        <br/>
-                        <i className="fa fa-envelope" aria-hidden="true"/>{ order.email }
+                        <p>Pet: { order.appointment.pet.name }</p>
+                        <p>Preço: { order.price }</p>
+                        <p>Cliente: { order.appointment.pet.customer.name  + ' / ' + order.appointment.pet.customer.cpf}</p>
+                        <p>Empregado responsável: { employeer.name }</p>
+
                       </div>
                     </div>
                   </div>
@@ -78,7 +85,7 @@ class Orders extends Component {
                     <a className="card-footer-item" onClick={() => {
                       this.props.getOrder(order.id)
                       this.props.openModal(this._buildModalStateToEdit())
-                    }}>Edit</a>
+                    }}>Marcar como Realizado</a>
                     <a className="card-footer-item" onClick={() => {this.props.deleteOrder(order)} }>Delete</a>
                   </footer>
                 </div>
@@ -91,7 +98,10 @@ class Orders extends Component {
 }
 
 function mapStateToProps(state) {
-  return { order : state.ordersState }
+  return {
+    employeer : state.employeersState,
+    order : state.ordersState
+  }
 }
 
 export default connect(mapStateToProps,

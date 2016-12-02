@@ -13,9 +13,16 @@ public class AppointmentConfigDAO implements Persistible<AppointmentConfig> {
                 conexao.get("entryTime", Long.class), conexao.get("lunchTime", Long.class), 
                 conexao.get("entryTimeAfterLunch", Long.class), conexao.get("homeTime", Long.class));
 
+    public AppointmentConfig findOneByEmployeer(int id) {
+        ConnectionApi conexao = new ConnectionApi("select * from appointment_config where employeer_id = ?", id);
+        conexao.executeQuery();
+        AppointmentConfig result = conexao.next() ? appointmentConfigMaker.make(conexao) : null; 
+        return result;
+    }
+    
     @Override
     public AppointmentConfig findOne(int id) {
-        ConnectionApi conexao = new ConnectionApi("select * from appointment_config where employeer_id = ?", id);
+        ConnectionApi conexao = new ConnectionApi("select * from appointment_config where id = ?", id);
         conexao.executeQuery();
         AppointmentConfig result = conexao.next() ? appointmentConfigMaker.make(conexao) : null; 
         return result;

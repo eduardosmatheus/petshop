@@ -10,8 +10,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import model.Appointment;
-import dao.AppointmentDAO;
 import dao.ServiceOrderDAO;
 import java.util.List;
 import model.ServiceOrder;
@@ -22,11 +20,11 @@ public class ServiceOrderService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() { 
-        AppointmentDAO dao = new AppointmentDAO();
-        List<Appointment> appointmentconfig = dao.all();
-        if(appointmentconfig.isEmpty())
+        ServiceOrderDAO dao = new ServiceOrderDAO();
+        List<ServiceOrder> serviceOrderm = dao.all();
+        if(serviceOrderm.isEmpty())
             return Response.status(Response.Status.NOT_FOUND).build();
-        return Response.ok(appointmentconfig, MediaType.APPLICATION_JSON)
+        return Response.ok(serviceOrderm, MediaType.APPLICATION_JSON)
                 .build();
     }
     
@@ -34,8 +32,8 @@ public class ServiceOrderService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") int id) {
-        AppointmentDAO dao = new AppointmentDAO();
-        Appointment r = dao.findOne(id); 
+        ServiceOrderDAO dao = new ServiceOrderDAO();
+        ServiceOrder r = dao.findOne(id); 
         if(r != null)
             return Response.ok(r, MediaType.APPLICATION_JSON)
                     .build();
@@ -58,9 +56,9 @@ public class ServiceOrderService {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response put(Appointment appointmentConfig) {
-        AppointmentDAO dao = new AppointmentDAO();
-        Appointment result = dao.update(appointmentConfig);
+    public Response put(ServiceOrder appointmentConfig) {
+        ServiceOrderDAO dao = new ServiceOrderDAO();
+        ServiceOrder result = dao.update(appointmentConfig);
         if(result == null) 
             return Response.noContent()
                 .build();
@@ -73,8 +71,8 @@ public class ServiceOrderService {
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response delete(@PathParam("id") final int id) { 
-        AppointmentDAO dao = new AppointmentDAO(); 
-        Appointment r = dao.findOne(id);
+        ServiceOrderDAO dao = new ServiceOrderDAO(); 
+        ServiceOrder r = dao.findOne(id);
         if(dao.delete(r))
             return Response.ok("Ordem de serviço removida com sucesso!")
                 .build();

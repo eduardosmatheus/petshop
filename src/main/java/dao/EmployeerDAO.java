@@ -12,7 +12,7 @@ public class EmployeerDAO implements Persistible<Employeer> {
             (conexao) -> new Employeer(conexao.get("id", Integer.class), conexao.get("name", String.class),
              conexao.get("cpf", String.class), conexao.get("phone", String.class),
                 conexao.get("email", String.class),
-            new AppointmentConfigDAO().findOne(conexao.get("id", Integer.class)));
+            new AppointmentConfigDAO().findOneByEmployeer(conexao.get("id", Integer.class)));
             
     @Override
     public Employeer findOne(int id) {
