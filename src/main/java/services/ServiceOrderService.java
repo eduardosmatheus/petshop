@@ -12,7 +12,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Appointment;
 import dao.AppointmentDAO;
+import dao.ServiceOrderDAO;
 import java.util.List;
+import model.ServiceOrder;
 
 @Path("orders")
 public class ServiceOrderService { 
@@ -43,11 +45,11 @@ public class ServiceOrderService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(Appointment appointmentConfig) { 
-        AppointmentDAO dao = new AppointmentDAO(); 
-        if(dao.create(appointmentConfig))
+    public Response create(ServiceOrder serviceOrder) { 
+        ServiceOrderDAO serviceOrderDAO = new ServiceOrderDAO();
+        if(serviceOrderDAO.create(serviceOrder))
             return Response.status(Response.Status.CREATED)
-                .entity(appointmentConfig).build();
+                .entity(serviceOrder).build();
         return Response.status(Response.Status.BAD_REQUEST)
             .build(); 
     }

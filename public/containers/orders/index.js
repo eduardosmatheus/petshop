@@ -1,39 +1,46 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchCustomers, createCustomer, updateCustomer, deleteCustomer, getCustomer, clearActualCustomer, filterCustomer } from '../../actions/ActionsCustomer'
+import { fetchOrders, createOrder, updateOrder, deleteOrder, getOrder, clearActualOrder, filterOrder } from '../../actions/ActionsOrder'
+import { fetchProducts } from '../../actions/ActionsProduct'
+import { fetchEmployeers } from '../../actions/ActionsEmployeer'
+import { fetchAnimals } from '../../actions/ActionsAnimal'
 import { openModal, closeModal } from '../../actions/ActionsModal'
 import { Link } from 'react-router'
 
-import CustomerForm from './form'
+import OrderForm from './form'
 import GridHeader from '../../components/GridHeader'
 
 
-class Customers extends Component {
+class Orders extends Component {
 
   componentWillMount() {
-    if(!this.props.children)
-      this.props.fetchCustomers()
+    if(!this.props.children) {
+      this.props.fetchProducts();
+      this.props.fetchEmployeers();
+      this.props.fetchAnimals();
+      this.props.fetchOrders();
+    }
   }
 
   _buildModalStateToEdit() {
     return {
-      modalTitle : "Editar Cliente",
-      contentRender : () => { return (<CustomerForm action={(customer) => {
+      modalTitle : "Editar Ordem de serviço",
+      contentRender : () => { return (<OrderForm action={(order) => {
         ::this.props.closeModal()
-        ::this.props.updateCustomer(customer)
+        ::this.props.updateOrder(order)
       }}/>)},
-      onModalUnmount : () => { ::this.props.clearActualCustomer() }
+      onModalUnmount : () => { ::this.props.clearActualOrder() }
     }
   }
 
   _buildModalStateToAdd() {
     return {
-      modalTitle : "Adicionar Cliente",
-      contentRender : () => { return (<CustomerForm action={(customer) => {
+      modalTitle : "Adicionar Ordem de serviço",
+      contentRender : () => { return (<OrderForm action={(order) => {
         ::this.props.closeModal()
-        ::this.props.createCustomer(customer)
+        ::this.props.createOrder(order)
       }}/>)},
-      onModalUnmount : () => { ::this.props.clearActualCustomer() }
+      onModalUnmount : () => { ::this.props.clearActualOrder() }
     }
   }
 
@@ -43,36 +50,36 @@ class Customers extends Component {
         <h3 className="title is-3">Ordens de Serviço</h3>
         <GridHeader
           openModal={ ()=> {
-            ::this.props.clearActualCustomer()
+            ::this.props.clearActualOrder()
             ::this.props.openModal(this._buildModalStateToAdd())
           }}
-          onChangeSearch={ (text) => {::this.props.filterCustomer(text)}}
+          onChangeSearch={ (text) => {::this.props.filterOrder(text)}}
         />
         <div className="columns is-multiline">
-          {this.props.customer.all.map(( customer ) => {
-            return (<div className="column is-one-third area-item animal-card" key={customer.id}>
+          {this.props.order.all.map(( order ) => {
+            return (<div className="column is-one-third area-item animal-card" key={order.id}>
                 <div className="card is-fullwidth">
                 <header className="card-header">
                   <p className="card-header-title">
-                    { customer.name }
+                    { order.name }
                  </p>
                 </header>
                   <div className="card-content">
                     <div className="media">
                       <div className="media-content">
-                        <p>CPF: { customer.cpf }</p>
-                        <i className="fa fa-phone" aria-hidden="true"/> { customer.phone }
+                        <p>CPF: { order.cpf }</p>
+                        <i className="fa fa-phone" aria-hidden="true"/> { order.phone }
                         <br/>
-                        <i className="fa fa-envelope" aria-hidden="true"/>{ customer.email }
+                        <i className="fa fa-envelope" aria-hidden="true"/>{ order.email }
                       </div>
                     </div>
                   </div>
                   <footer className="card-footer">
                     <a className="card-footer-item" onClick={() => {
-                      this.props.getCustomer(customer.id)
+                      this.props.getOrder(order.id)
                       this.props.openModal(this._buildModalStateToEdit())
                     }}>Edit</a>
-                    <a className="card-footer-item" onClick={() => {this.props.deleteCustomer(customer)} }>Delete</a>
+                    <a className="card-footer-item" onClick={() => {this.props.deleteOrder(order)} }>Delete</a>
                   </footer>
                 </div>
               </div>) }
@@ -84,8 +91,8 @@ class Customers extends Component {
 }
 
 function mapStateToProps(state) {
-  return { customer : state.customerState }
+  return { order : state.ordersState }
 }
 
 export default connect(mapStateToProps,
-  { fetchCustomers, getCustomer, deleteCustomer, createCustomer, updateCustomer, clearActualCustomer, filterCustomer, closeModal, openModal })(Customers)
+  { fetchOrders, getOrder, deleteOrder, createOrder, updateOrder, clearActualOrder, filterOrder, closeModal, openModal, fetchProducts, fetchEmployeers, fetchAnimals })(Orders)

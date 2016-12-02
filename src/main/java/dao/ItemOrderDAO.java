@@ -43,11 +43,10 @@ public class ItemOrderDAO implements Persistible<ItemOrder> {
         return itemOrder;
     }
 
-    @Override
-    public boolean create(ItemOrder entity) {
+    public boolean create(ItemOrder entity, int orderId) {
         ConnectionApi conexao = new ConnectionApi();
-        entity.setId(conexao.executeUpdate("insert into itens_service_orders (itens_id, amount, unit_price) values (?,?,?)",
-            entity.getItem().getId(), entity.getAmount(), entity.getUnitPrice()));
+        entity.setId(conexao.executeUpdate("insert into itens_service_orders (itens_id, service_order_id, amount, unit_price) values (?,?,?, ?)",
+            entity.getItem().getId(), orderId, entity.getAmount(), entity.getUnitPrice()));
         return entity.getId() > 0;
     }
 
@@ -65,6 +64,11 @@ public class ItemOrderDAO implements Persistible<ItemOrder> {
         ConnectionApi conexao = new ConnectionApi("delete from itens_service_orders where id = ?", entity.getId());
         final int rowsAffected = conexao.executeUpdate(); 
         return rowsAffected > 0;
+    }
+
+    @Override
+    public boolean create(ItemOrder entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
      
 }

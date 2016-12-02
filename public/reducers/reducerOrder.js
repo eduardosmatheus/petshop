@@ -1,5 +1,5 @@
 import { CLEAR_ACTUAL_ORDER, FETCH_ORDERS, CREATE_ORDER,
-  GET_ORDER, UPDATE_ORDER, DELETE_ORDER,
+  GET_ORDER, UPDATE_ORDER, DELETE_ORDER, ADD_ITEM_TEMP_ORDER,
   ERROR } from '../actions'
 
 const INITIAL_STATE = {
@@ -10,19 +10,19 @@ const INITIAL_STATE = {
     price: 0,
     appointment: {
       id: '',
-      appointmentConfig: {
-        id: '',
-        employeer: {
-          id : '',
-          name : '',
-          cpf : '',
-          phone : '',
-          email : ''
-        },
-        entryTime: 0,
-        lunchTime: 0,
-        entryTimeAfterLunch: 0,
-        homeTime: 0,
+      employeer: {
+        id : '',
+        name : '',
+        cpf : '',
+        phone : '',
+        email : '',
+        appointmentConfig: {
+          id: '', 
+          entryTime: 0,
+          lunchTime: 0,
+          entryTimeAfterLunch: 0,
+          homeTime: 0,
+        }
       },
       pet: {
         id: '',
@@ -62,7 +62,8 @@ const INITIAL_STATE = {
         amount: 0,
         unitPrice: 0
       }
-    ]
+    ],
+    listItensTemp : []
   },
   error : null
 }
@@ -71,11 +72,11 @@ export default function(state = INITIAL_STATE, action) {
   let {all, actual} = state
   switch (action.type) {
     case FETCH_ORDERS:
-      return {...state, all : action.payload }
+      return {...state, all: action.payload }
       break
     case CREATE_ORDER:
       all.push(action.payload)
-      return {...state, all : state.all}
+      return {...state, all: state.all}
       break
     case UPDATE_ORDER:
       all = all.map((ob) => {
@@ -84,21 +85,31 @@ export default function(state = INITIAL_STATE, action) {
         }
         return ob
       })
-      return {...state, all : all, actual : INITIAL_STATE.actual}
+      return {...state, all: all, actual: INITIAL_STATE.actual}
       break
     case DELETE_ORDER:
       let x = all.indexOf(action.payload)
       all.splice(x, 1)
-      return {...state, all : state.all, actual : INITIAL_STATE.actual}
+      return {...state, all: state.all, actual: INITIAL_STATE.actual}
       break
     case GET_ORDER:
-      return {...state, actual : action.payload }
+      return {...state, actual: action.payload }
       break
     case CLEAR_ACTUAL_ORDER:
-      return {...state, actual : INITIAL_STATE.actual}
+      return {...state, actual: INITIAL_STATE.actual }
       break
+    case ADD_ITEM_TEMP_ORDER:
+      let { listItensTemp } = state.actual;
+      listItensTemp.push(action.payload);
+      return {
+        ...state,
+        actual: {
+          ...state.actual,
+          listItensTemp: listItensTemp
+        }
+      }
     case ERROR :
-      return {...state, error : action.error}
+      return {...state, error: action.error}
       break
   }
 

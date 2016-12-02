@@ -1,40 +1,176 @@
 import React, { Component } from 'react'
+import Select, { Creatable } from 'react-select'
+import { addItemToList } from '../../actions/ActionsOrder'
 import { reduxForm, change as changeFieldValue } from 'redux-form'
+import { parseTimeStringFormatToMillisecods } from '../../dateParser'
 
 
-class CustomerForm extends Component {
+class OrderForm extends Component {
+
+  _parseFormToState(form) {
+
+    let employeer = this.props.employeersState.all.reduce((acc, act) => {
+      if(form.employeer == act.id)
+        return act;
+      return acc;
+    });
+
+    let pet = this.props.animalsState.all.reduce((acc, act) => {
+      if(form.pet == act.id)
+        return act;
+      return acc;
+    });
+
+    let itens = form.itens.map((item) => {
+      let itemFromState = this.props.productsState.all.reduce((acc, act) => {
+        if(item.id == act.id)
+          return act;
+        return acc;
+      })
+      return {
+        id: '',
+        item: itemFromState,
+        amount: item.amountProd,
+        unitPrice: item.priceProd
+      }
+    });
+
+    return {
+      id: '',
+      accessKey: form.accessKey,
+      price: form.price,
+      appointment: {
+        id: '',
+        appointmentConfig: {
+          ...employeer.appointmentConfig,
+          employeers_id: employeer.id
+        },
+        pet: pet,
+        date: form.date,
+        entryTime: parseTimeStringFormatToMillisecods(form.entryTime),
+        outTime: parseTimeStringFormatToMillisecods(form.outTime),
+        done: 0,
+        obs: ''
+      },
+      itens: itens
+    };
+  }
 
   render() {
-    let { fields : { id, name, cpf, phone, email } } = this.props
+    let { fields : { id, accessKey, pet, price, employeer, date, entryTime, outTime, product, priceProd, amountProd }, animalsState, employeersState, productsState } = this.props
+
     return (
-      <form onSubmit={ this.props.handleSubmit(this.props.action) }>
+      <form onSubmit={
+
+        this.props.handleSubmit((form) => {
+          form.itens = this.props.ordersState.actual.listItensTemp;
+          form = this._parseFormToState(form);
+          this.props.action(form);
+        })
+
+      }>
         <p className="control has-icon has-icon-right">
           <input type="hidden" className="input" { ...id } readOnly/>
         </p>
         <p className="control has-icon has-icon-right">
-          <label className="label">Nome</label>
-          <input type="text" className={`input ${name.error && name.touched ? `is-danger` : ``} `} {...name} maxLength='60'/>
-          {name.error && name.touched && <i className="fa fa-warning"></i>}
-          {name.error && name.touched && <span className="help is-danger">{ name.error }</span>}
+          <label className="label">Descrição do serviço:</label>
+          <input type="text" className={`input ${accessKey.error && accessKey.touched ? `is-danger` : ``} `} {...accessKey} maxLength='60'/>
+          {accessKey.error && accessKey.touched && <i className="fa fa-warning"></i>}
+          {accessKey.error && accessKey.touched && <span className="help is-danger">{ accessKey.error }</span>}
+        </p>
+        <div className="control">
+          <label className="label">Pet:</label>
+          <Select
+            {...pet}
+            options={animalsState.all.map((pet) => {  return {value: pet.id, label: (pet.name + ' - ' + pet.customer.name + ' / ' + pet.customer.cpf) } } )}
+            onBlur={() => pet.onBlur(pet.value)}/>
+        </div>
+        <p className="control has-icon has-icon-right">
+          <label className="label">Preço do serviço:</label>
+          <input type="number" className={`input ${price.error && price.touched ? `is-danger` : ``} `} {...price} maxLength='60'/>
+          {price.error && price.touched && <i className="fa fa-warning"></i>}
+          {price.error && price.touched && <span className="help is-danger">{ price.error }</span>}
+        </p>
+        <div className="control">
+          <label className="label">Empregado responsável:</label>
+          <Select
+            {...employeer}
+            options={employeersState.all.map((employeer) => {  return {value: employeer.id, label: employeer.name } } )}
+            onBlur={() => employeer.onBlur(employeer.value)}/>
+        </div>
+        <p className="control has-icon has-icon-right">
+          <label className="label">Data planejada para executar o serviço:</label>
+          <input type="date" className={`input ${date.error && date.touched ? `is-danger` : ``} `} {...date} maxLength='60'/>
+          {date.error && date.touched && <i className="fa fa-warning"></i>}
+          {date.error && date.touched && <span className="help is-danger">{ date.error }</span>}
         </p>
         <p className="control has-icon has-icon-right">
-          <label className="label">CPF</label>
-          <input type="text" className={`input ${cpf.error && cpf.touched ? `is-danger` : ``} `} {...cpf} maxLength='60'/>
-          {cpf.error && cpf.touched && <i className="fa fa-warning"></i>}
-          {cpf.error && cpf.touched && <span className="help is-danger">{ cpf.error }</span>}
+          <label className="label">Inicio às:</label>
+          <input type="time" className={`input ${entryTime.error && entryTime.touched ? `is-danger` : ``} `} {...entryTime} maxLength='60'/>
+          {entryTime.error && entryTime.touched && <i className="fa fa-warning"></i>}
+          {entryTime.error && entryTime.touched && <span className="help is-danger">{ entryTime.error }</span>}
         </p>
         <p className="control has-icon has-icon-right">
-          <label className="label">Telefone</label>
-          <input type="text" className={`input ${phone.error && phone.touched ? `is-danger` : ``} `} {...phone} maxLength='60'/>
-          {phone.error && phone.touched && <i className="fa fa-warning"></i>}
-          {phone.error && phone.touched && <span className="help is-danger">{ phone.error }</span>}
+          <label className="label">Fim planejado às:</label>
+          <input type="time" className={`input ${outTime.error && outTime.touched ? `is-danger` : ``} `} {...outTime} maxLength='60'/>
+          {outTime.error && outTime.touched && <i className="fa fa-warning"></i>}
+          {outTime.error && outTime.touched && <span className="help is-danger">{ outTime.error }</span>}
         </p>
-        <p className="control has-icon has-icon-right">
-          <label className="label">E-mail</label>
-          <input type="email" className={`input ${email.error && email.touched ? `is-danger` : ``} `} {...email} maxLength='60'/>
-          {email.error && email.touched && <i className="fa fa-warning"></i>}
-          {email.error && email.touched && <span className="help is-danger">{ email.error }</span>}
-        </p>
+        <div className="control" style={{backgroundColor: '#F1F1F1'}}>
+          <div className="columns">
+            <div className="column">
+              <label className="label">Item:</label>
+            </div>
+            <div className="column">
+              <label className="label">Preço:</label>
+            </div>
+            <div className="column">
+              <label className="label">Quantidade:</label>
+            </div>
+            <div className="column">
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column">
+              <Select
+                {...product}
+                options={productsState.all.map((product) => {  return {value: product.id, label: product.description } } )}
+                onBlur={() => product.onBlur(product.value)}/>
+            </div>
+            <div className="column">
+              <input type="number" className="input" {...priceProd} maxLength='60'/>
+            </div>
+            <div className="column">
+              <input type="number" className="input" {...amountProd} maxLength='60'/>
+            </div>
+            <div className="column">
+              <input type="button" className="button is-primary" value="Adicionar Produto" onClick={() => {
+                this.props.addItemToList({ id: product.value, priceProd: priceProd.value, amountProd: amountProd.value});
+                this.props.changeFieldValue('OrderForm','product','');
+                this.props.changeFieldValue('OrderForm','priceProd','0');
+                this.props.changeFieldValue('OrderForm','amountProd','0');
+              }}/>
+            </div>
+          </div>
+          Lista de produtos assiados:
+          <div className="control">
+               {this.props.ordersState.actual.listItensTemp.map((o, i) => {
+                 return(<div className="columns" key={i}>
+                      <div className="column">
+                        <label className="label">{productsState.all.filter((a) => a.id == o.id).map((prod) => {
+                          return prod.description
+                        })}</label>
+                      </div>
+                      <div className="column">
+                        <label className="label">{o.priceProd}</label>
+                      </div>
+                      <div className="column">
+                        <label className="label">{o.amountProd}</label>
+                      </div>
+                    </div>)
+               })}
+          </div>
+        </div>
         <p className="control">
           <button type="submit"  className="button is-primary">Gravar</button>
         </p>
@@ -45,29 +181,22 @@ class CustomerForm extends Component {
 
 function mapStateToProps(state) {
   return {
-    initialValues : state.customerState.actual
+    animalsState: state.animalsState,
+    productsState: state.productsState,
+    employeersState: state.employeersState,
+    ordersState: state.ordersState,
+    initialValues : {}
   }
 }
 
 export default reduxForm({
-  form : 'CustomerForm',
-  fields : ['id', 'name', 'cpf', 'phone', 'email'],
+  form : 'OrderForm',
+  fields : ['id', 'accessKey', 'pet', 'price', 'employeer', 'date', 'entryTime', 'outTime', 'product', 'priceProd', 'amountProd'],
   validate : (values) => {
     let error = {}
-
-    if(!values.name)
-      error.name = 'Informe o nome do cliente!'
-
-    if(!values.cpf)
-      error.cpf = 'Informe o cpf do cliente!'
-
-    if(!values.phone)
-      error.phone = 'Informe o telefone do cliente!'
-
-    if(!values.email)
-      error.email = 'Informe o e-mail do cliente!'
-
+    if(!values.accessKey)
+      error.accessKey = 'Informe uma descrição para o serviço.';
     return error;
   }
 
-}, mapStateToProps, { changeFieldValue })(CustomerForm)
+}, mapStateToProps, { changeFieldValue, addItemToList })(OrderForm)

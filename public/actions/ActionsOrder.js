@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import {CLEAR_ACTUAL_ORDER, FETCH_ORDERS, CREATE_ORDER,
-  GET_ORDER, UPDATE_ORDER, DELETE_ORDER,
+  GET_ORDER, UPDATE_ORDER, DELETE_ORDER, ADD_ITEM_TEMP_ORDER,
   ERROR, ROOT_URL, errorDispatch} from './'
 
 export const ORDERS_URL = 'orders'
@@ -18,6 +18,7 @@ export function fetchOrders() {
 }
 
 export function createOrder(order) {
+  console.log('order::::', order);
   return dispatch => {
     axios.post(`${ROOT_URL}/${ORDERS_URL}`, order).then( response => {
       dispatch({
@@ -70,6 +71,15 @@ export function clearActualOrder() {
       type : CLEAR_ACTUAL_ORDER
     })
   }
+}
+
+export function addItemToList(item) {
+  return dispatch => {
+    return dispatch({
+      type: ADD_ITEM_TEMP_ORDER,
+      payload: item
+    })
+  };
 }
 
 export function filterOrder(searchString) {

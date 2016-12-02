@@ -3,7 +3,7 @@ package dao;
 import db.ConnectionApi;
 import db.Maker;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import model.Appointment;
 

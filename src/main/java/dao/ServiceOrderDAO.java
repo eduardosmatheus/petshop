@@ -39,11 +39,11 @@ public class ServiceOrderDAO implements Persistible<ServiceOrder> {
     @Override
     public boolean create(ServiceOrder entity) {
         ConnectionApi conexao = new ConnectionApi();
+        new AppointmentDAO().create(entity.getAppointment());
         entity.setId(conexao.executeUpdate("insert into service_order (appointments_id, access_key, price) values (?,?,?)",
             entity.getAppointment().getId(), entity.getAccessKey(), entity.getPrice()));
         
-        entity.getItens().forEach(new ItemOrderDAO()::create);
-        new AppointmentDAO().create(entity.getAppointment());
+        entity.getItens().forEach((item) -> { new ItemOrderDAO().create(item, entity.getId()); });
         
         return entity.getId() > 0;
     }
