@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Select, { Creatable } from 'react-select'
 import { addItemToList } from '../../actions/ActionsOrder'
 import { reduxForm, change as changeFieldValue } from 'redux-form'
-import { parseTimeStringFormatToMillisecods } from '../../dateParser'
+import { parseTimeStringFormatToMillisecods, parseMillisecodsToTimeStringFormat } from '../../dateParser'
 
 
 class OrderForm extends Component {
@@ -105,6 +105,19 @@ class OrderForm extends Component {
           {date.error && date.touched && <span className="help is-danger">{ date.error }</span>}
         </p>
         <p className="control has-icon has-icon-right">
+          Horários vagos para a data:
+          {
+            date.value && this.props.ordersState.all.filter(order => {
+                return order.appointment.done == 0 && order.appointment.appointmentConfig.employeers_id == employeer.value && order.appointment.date == date.value;
+              }).map((order, i) => {
+                  return (<label className="label" keys={i}>
+                    { parseMillisecodsToTimeStringFormat(order.appointment.entryTime) + ' - ' + parseMillisecodsToTimeStringFormat(order.appointment.outTime) }
+                  </label>);
+            })
+          }
+        </p>
+
+        <p className="control has-icon has-icon-right">
           <label className="label">Inicio às:</label>
           <input type="time" className={`input ${entryTime.error && entryTime.touched ? `is-danger` : ``} `} {...entryTime} maxLength='60'/>
           {entryTime.error && entryTime.touched && <i className="fa fa-warning"></i>}
@@ -196,6 +209,25 @@ export default reduxForm({
     let error = {}
     if(!values.accessKey)
       error.accessKey = 'Informe uma descrição para o serviço.';
+
+    if(!values.pet)
+      error.pet = 'Informe um pet para o serviço.';
+
+    if(!values.price)
+      error.price = 'Informe um preço de mão de obra para o serviço.';
+
+    if(!values.employeer)
+      error.employeer = 'Informe um Empregado para o serviço.';
+
+    if(!values.date)
+      error.date = 'Informe uma Data para o serviço.';
+
+    if(!values.entryTime)
+      error.entryTime = 'Informe uma hora inicio para o serviço.';
+
+    if(!values.outTime)
+      error.outTime = 'Informe uma hora fim para o serviço.';
+
     return error;
   }
 

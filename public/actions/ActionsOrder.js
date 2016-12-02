@@ -85,10 +85,16 @@ export function addItemToList(item) {
 export function filterOrder(searchString) {
   return dispatch => {
     axios.get(`${ROOT_URL}/${ORDERS_URL}`).then(response => {
+      console.log(response);
       dispatch({
         type : FETCH_ORDERS,
         payload : response.data.filter((order) => {
-          return order.id == searchString || order.name.indexOf(searchString) != -1 //TODO: mover filtro para consulta no servidor 'FindLike'.
+          return order.id == searchString
+          || order.accessKey.indexOf(searchString) != -1
+          || order.appointment.date.indexOf(searchString) != -1
+          || order.appointment.pet.name.indexOf(searchString) != -1
+          || order.appointment.pet.customer.name.indexOf(searchString) != -1
+          || order.appointment.pet.customer.cpf.indexOf(searchString) != -1//TODO: mover filtro para consulta no servidor 'FindLike'.
         })
       })
     }).catch(errorDispatch)

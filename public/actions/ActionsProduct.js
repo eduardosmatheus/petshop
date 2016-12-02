@@ -79,7 +79,7 @@ export function filterProduct(searchString) {
       dispatch({
         type : FETCH_PRODUCTS,
         payload : response.data.filter((product) => {
-          return product.id == searchString || product.name.indexOf(searchString) != -1 //TODO: mover filtro para consulta no servidor 'FindLike'.
+          return product.id == searchString || product.description.indexOf(searchString) != -1 //TODO: mover filtro para consulta no servidor 'FindLike'.
         })
       })
     }).catch(errorDispatch)

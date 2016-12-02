@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchEmployeers } from '../../actions/ActionsEmployeer'
-import { fetchAppointments, createAppointment, updateAppointment, deleteAppointment, getAppointment, clearActualAppointment, filterAppointment } from '../../actions/ActionsAppointments'
+import { fetchAppointments, createAppointment, updateAppointment, deleteAppointment, getAppointment, clearActualAppointment, filterAppointments } from '../../actions/ActionsAppointments'
 import { openModal, closeModal } from '../../actions/ActionsModal'
 import { parseTimeStringFormatToMillisecods, parseMillisecodsToTimeStringFormat } from '../../dateParser'
 import { Link } from 'react-router'
@@ -55,7 +55,7 @@ class Appointments extends Component {
             ::this.props.clearActualAppointment();
             ::this.props.openModal(this._buildModalStateToAdd());
           }}
-          onChangeSearch={ (text) => {::this.props.filterAppointment(text)}}
+          onChangeSearch={ (text) => {::this.props.filterAppointments(text)}}
         />
         <div className="columns is-multiline">
           {all.filter(ap => ap.done == 0).map((appointment) => {
@@ -126,4 +126,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  { fetchAppointments, getAppointment, deleteAppointment, createAppointment, updateAppointment, clearActualAppointment, filterAppointment, closeModal, openModal, fetchEmployeers })(Appointments)
+  { fetchAppointments, getAppointment, deleteAppointment, createAppointment, updateAppointment, clearActualAppointment, filterAppointments, closeModal, openModal, fetchEmployeers })(Appointments)

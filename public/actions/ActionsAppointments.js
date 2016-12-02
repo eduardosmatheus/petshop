@@ -73,12 +73,17 @@ export function clearActualAppointments() {
 }
 
 export function filterAppointments(searchString) {
+
   return dispatch => {
     axios.get(`${ROOT_URL}/${APPOINTMENTS_URL}`).then(response => {
       dispatch({
         type : FETCH_APPOINTMENTS,
-        payload : response.data.filter((appointments) => {
-          return appointments.id == searchString || appointments.name.indexOf(searchString) != -1 //TODO: mover filtro para consulta no servidor 'FindLike'.
+        payload : response.data.filter((appointment) => {
+          return appointment.id == searchString
+          || appointment.date.indexOf(searchString) != -1
+          || appointment.pet.name.indexOf(searchString) != -1
+          || appointment.pet.customer.name.indexOf(searchString) != -1 
+          || appointment.pet.customer.cpf.indexOf(searchString) != -1 //TODO: mover filtro para consulta no servidor 'FindLike'.
         })
       })
     }).catch(errorDispatch)
