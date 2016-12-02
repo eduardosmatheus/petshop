@@ -12,7 +12,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Appointment;
 import dao.AppointmentDAO;
+import dao.ServiceOrderDAO;
 import java.util.List;
+import model.ServiceOrder;
 
 @Path("appointments")
 public class AppointmentsService { 
@@ -55,16 +57,15 @@ public class AppointmentsService {
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response put(Appointment appointmentConfig) {
-        AppointmentDAO dao = new AppointmentDAO();
-        Appointment result = dao.update(appointmentConfig);
-        if(result == null) 
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response put(@PathParam("id") int id) {
+        AppointmentDAO daoAppoint = new AppointmentDAO();  
+        if(daoAppoint.alterarSituacao(id, 1)) 
             return Response.noContent()
                 .build();
         
-        return Response.ok(appointmentConfig)
-            .build(); 
+        return Response.ok("Agendamento concluido com sucesso!")
+            .build();
     }
     
     @DELETE

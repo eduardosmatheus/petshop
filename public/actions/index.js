@@ -59,4 +59,14 @@ export const BILLING_TOTALS = 'BILLING_TOTALS'
 
 export const ERROR = 'ERROR'
 export const ROOT_URL = 'http://localhost:8080/PetshopWebApi'
-export const errorDispatch = ((err) => ({ type : ERROR, error : err })  )
+export const errorDispatch = ((err) => {
+  console.log(err);
+  return {
+    type: 'GROWLER__SHOW',
+    growler: {
+      text: 'Não foi possível deletar o registro',
+      type: 'growler--error',
+    },
+  }
+}
+);

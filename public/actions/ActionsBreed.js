@@ -41,7 +41,7 @@ export function getBreed(id) {
 
 export function updateBreed(breed) {
   return dispatch => {
-    axios.put(`${ROOT_URL}/${BREEDS_URL}`, breed)
+    axios.put(`${ROOT_URL}/${BREEDS_URL}/${breed.id}`, breed)
     .then( response => {
       dispatch({
         type :  UPDATE_BREED,

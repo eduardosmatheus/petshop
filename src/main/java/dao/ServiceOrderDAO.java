@@ -80,6 +80,6 @@ public class ServiceOrderDAO implements Persistible<ServiceOrder> {
         conexao.executeQuery();
         double result = conexao.next() ? conexao.get("somatoria", Double.class) : 0d;
         return result;
-    }
+    } 
      
 }

@@ -24,8 +24,11 @@ module.exports = {
       {
         test: /\.js?/,
         exclude: [/node_modules/, /styles/],
-        loaders: ['babel?presets[]=react,presets[]=es2015,presets[]=stage-0'], 
-        include: path.join(__dirname, 'public')
+        loaders: ['babel'],
+        include: [
+          path.join(__dirname, 'public'),
+          path.resolve(__dirname, "node_modules/flash-notification-react-redux")
+        ]
       },
       {
         test: /\.scss$/,

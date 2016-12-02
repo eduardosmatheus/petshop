@@ -61,4 +61,11 @@ public class AppointmentDAO implements Persistible<Appointment> {
         final int rowsAffected = conexao.executeUpdate(); 
         return rowsAffected > 0; 
     }
+    
+    public boolean alterarSituacao(int id, int situacao) {
+        ConnectionApi conexao = new ConnectionApi("update appointments "
+                + "set done=? where id = ?", situacao, id);
+        return conexao.executeUpdate() > 0; 
+    }
+    
 }

@@ -18,7 +18,7 @@ public class ConnectionApi {
     private ResultSet result;
 
     public ConnectionApi() {
-        this.conn = openDatabase();
+        this.conn = getConnection();
     }
     
     public ConnectionApi(String sql, Object... params) {
@@ -97,5 +97,13 @@ public class ConnectionApi {
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    private static Connection dataBaseConnection;
+    
+    private static Connection getConnection() {
+        if(dataBaseConnection == null)
+            return dataBaseConnection = openDatabase();
+        
+        return dataBaseConnection;
     }
 }

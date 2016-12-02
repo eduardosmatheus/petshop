@@ -44,6 +44,7 @@
   "dependencies": {
     "axios": "^0.15.2",
     "bulma": "^0.2.3",
+    "flash-notification-react-redux": "^1.0.5",
     "react": "^0.14.3",
     "react-clipboard": "^1.2.2",
     "react-dom": "^0.14.3",

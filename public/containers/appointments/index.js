@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { fetchEmployeers } from '../../actions/ActionsEmployeer'
 import { fetchAppointments, createAppointment, updateAppointment, deleteAppointment, getAppointment, clearActualAppointment, filterAppointment } from '../../actions/ActionsAppointments'
 import { openModal, closeModal } from '../../actions/ActionsModal'
+import { parseTimeStringFormatToMillisecods, parseMillisecodsToTimeStringFormat } from '../../dateParser'
 import { Link } from 'react-router'
 
 import AppointmentForm from './form'
@@ -11,8 +13,10 @@ import GridHeader from '../../components/GridHeader'
 class Appointments extends Component {
 
   componentWillMount() {
-    if(!this.props.children)
-      this.props.fetchAppointments()
+    if(!this.props.children) {
+      this.props.fetchEmployeers();
+      this.props.fetchAppointments();
+    }
   }
 
   _buildModalStateToEdit() {
@@ -43,6 +47,7 @@ class Appointments extends Component {
       return (<div>{this.props.children}</div>)
 
     let { all } = this.props.appointments;
+    console.log(all);
     return  (
       <div>
         <GridHeader
@@ -53,7 +58,37 @@ class Appointments extends Component {
           onChangeSearch={ (text) => {::this.props.filterAppointment(text)}}
         />
         <div className="columns is-multiline">
-          TESTE
+          {all.filter(ap => ap.done == 0).map((appointment) => {
+            console.log(appointment);
+            return (<div className="column is-one-third area-item animal-card" key={appointment.id}>
+                <div className="card is-fullwidth">
+                <header className="card-header">
+                  <p className="card-header-title">
+                    { appointment.date + ' - ' + this.props.employeersState.all.reduce((acc, act) => {
+                      if(act.id == appointment.appointmentConfig.employeers_id)
+                        return act;
+                      return acc;
+                    },  { id: 0, name: ''}).name}
+                 </p>
+                </header>
+                  <div className="card-content">
+                    <div className="media">
+                      <div className="media-content">
+                        <p>Horário inicio: { parseMillisecodsToTimeStringFormat(appointment.entryTime) }</p>
+                        <p>Horário fim:{ parseMillisecodsToTimeStringFormat(appointment.outTime) }</p>
+                        <strong>Pet: { appointment.pet.name }</strong>
+                        <p>Cliente: { appointment.pet.customer.name + ' / ' + appointment.pet.customer.cpf}</p>
+                        <p>Fone: { appointment.pet.customer.phone }</p>
+                        { appointment.pet.obs && <p><strong>Obs:</strong> { appointment.pet.obs }</p>}
+                      </div>
+                    </div>
+                  </div>
+                  <footer className="card-footer">
+                    <a className="card-footer-item" onClick={() => {this.props.updateAppointment(appointment.id)} }>Concluir</a>
+                  </footer>
+                </div>
+              </div>);
+          })}
         </div>
       </div>)
   }
@@ -84,8 +119,11 @@ class Appointments extends Component {
 }
 
 function mapStateToProps(state) {
-  return { appointments : state.appointmentsState }
+  return {
+    employeersState: state.employeersState,
+    appointments : state.appointmentsState
+  }
 }
 
 export default connect(mapStateToProps,
-  { fetchAppointments, getAppointment, deleteAppointment, createAppointment, updateAppointment, clearActualAppointment, filterAppointment, closeModal, openModal })(Appointments)
+  { fetchAppointments, getAppointment, deleteAppointment, createAppointment, updateAppointment, clearActualAppointment, filterAppointment, closeModal, openModal, fetchEmployeers })(Appointments)

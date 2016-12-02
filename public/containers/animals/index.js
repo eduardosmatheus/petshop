@@ -140,7 +140,7 @@ class Animals extends Component {
                       <span>Raças</span>
                     </Link>
                   </li>
-                  <li className={pathname == '/animals/animals' ? 'is-active' : ''}>
+                  <li className={pathname == '/animals/especies' ? 'is-active' : ''}>
                     <Link to="/animals/especies">
                       <span>Especies</span>
                     </Link>

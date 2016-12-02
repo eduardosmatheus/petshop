@@ -56,7 +56,7 @@ class Orders extends Component {
           onChangeSearch={ (text) => {::this.props.filterOrder(text)}}
         />
         <div className="columns is-multiline">
-          {this.props.order.all.map(( order ) => {
+          {this.props.order.all.filter(ob => ob.appointment.done == 0).map(( order ) => {
             let { employeers_id } = order.appointment.appointmentConfig;
             let employeer = this.props.employeer.all.reduce((acc, act) => {
               if(employeers_id == act.id)
@@ -65,11 +65,11 @@ class Orders extends Component {
             });
             return (<div className="column is-half area-item animal-card" key={order.id}>
                 <div className="card is-fullwidth">
-                <header className="card-header">
-                  <p className="card-header-title">
-                    { order.accessKey }
-                 </p>
-                </header>
+                  <header className="card-header">
+                    <p className="card-header-title">
+                      { order.accessKey }
+                   </p>
+                  </header>
                   <div className="card-content">
                     <div className="media">
                       <div className="media-content">
@@ -77,16 +77,11 @@ class Orders extends Component {
                         <p>Preço: { order.price }</p>
                         <p>Cliente: { order.appointment.pet.customer.name  + ' / ' + order.appointment.pet.customer.cpf}</p>
                         <p>Empregado responsável: { employeer.name }</p>
-
                       </div>
                     </div>
                   </div>
                   <footer className="card-footer">
-                    <a className="card-footer-item" onClick={() => {
-                      this.props.getOrder(order.id)
-                      this.props.openModal(this._buildModalStateToEdit())
-                    }}>Marcar como Realizado</a>
-                    <a className="card-footer-item" onClick={() => {this.props.deleteOrder(order)} }>Delete</a>
+                    <a className="card-footer-item" onClick={() => {this.props.deleteOrder(order)} }>Cancelar</a>
                   </footer>
                 </div>
               </div>) }

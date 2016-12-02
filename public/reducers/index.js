@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   employeersState: EmployeerReducer,
   appointmentsState: AppointmentReducer,
   productsState: ProductReducer,
-  dashboardsState : DashboardReducer,
+  dashboardsState : DashboardReducer, 
   form: formReducer,
   modal: ModalReducer
 })

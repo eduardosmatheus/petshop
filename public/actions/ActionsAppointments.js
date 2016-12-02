@@ -39,13 +39,13 @@ export function getAppointments(id) {
   }
 }
 
-export function updateAppointments(appointments) {
+export function updateAppointment(appointment) {
   return dispatch => {
-    axios.put(`${ROOT_URL}/${APPOINTMENTS_URL}`, appointments)
+    axios.put(`${ROOT_URL}/${APPOINTMENTS_URL}/${appointment}`)
     .then( response => {
       dispatch({
         type :  UPDATE_APPOINTMENT,
-        payload : response.data
+        payload : appointment
       })
     }).catch(errorDispatch)
   }

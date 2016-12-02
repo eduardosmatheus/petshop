@@ -1,5 +1,6 @@
 package services;
 
+import dao.AppointmentDAO;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import dao.ServiceOrderDAO;
 import java.util.List;
+import model.Appointment;
 import model.ServiceOrder;
 
 @Path("orders")
@@ -71,10 +73,11 @@ public class ServiceOrderService {
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response delete(@PathParam("id") final int id) { 
-        ServiceOrderDAO dao = new ServiceOrderDAO(); 
-        ServiceOrder r = dao.findOne(id);
-        if(dao.delete(r))
-            return Response.ok("Ordem de serviço removida com sucesso!")
+        AppointmentDAO daoAppoint = new AppointmentDAO(); 
+        ServiceOrderDAO daoService = new ServiceOrderDAO();
+        ServiceOrder r = daoService.findOne(id);
+        if(daoAppoint.alterarSituacao(r.getAppointment().getId(), 2))
+            return Response.ok("Ordem de serviço cancelada com sucesso!")
                 .build();
         return Response.status(Response.Status.NOT_FOUND)
             .build();
