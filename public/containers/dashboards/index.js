@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { fetchTotalPayments } from '../../actions/ActionsDashboard'
 
 import AppointmentsPerDay from './appointmentsPerDay'
+import AppointmentsByPerson from './appointmentsByPerson'
 
 class Dashboard extends Component {
   render() {
@@ -11,16 +12,12 @@ class Dashboard extends Component {
     console.log(this.props)
 
     return(
-      <div className="columns">
-        <div className="column"></div>
-
-        <div className="column is-4">
+      <div className="container">
+        <div className="columns">
           <div className="column">
             <div className="card is-fullwidth">
               <header className="card-header">
-                <p className="card-header-title title is-5">
-                  Pagamentos a receber
-                </p>
+                <div className="card-header-title title is-5">Pagamentos a receber:</div>
               </header>
               <div className="card-content">
                 <div className="content has-text-centered title is-1">
@@ -33,7 +30,7 @@ class Dashboard extends Component {
           <div className = "column">
             <div className="card is-fullwidth">
               <header className="card-header">
-                <p className="card-header-title title is-5">Total de atendimentos em aberto</p>
+                <div className="card-header-title title is-5 has-text-centered">Serviços em aberto:</div>
               </header>
               <div className="card-content">
                 <div className="content has-text-centered title is-1">
@@ -46,7 +43,7 @@ class Dashboard extends Component {
           <div className="column">
             <div className="card is-fullwidth">
               <header className="card-header">
-                <p className="card-header-title title is-5">Atendimentos para hoje:</p>
+                <div className="card-header-title title is-5 has-text-centered">Atendimentos p/ hoje:</div>
               </header>
               <div className="card-content">
                 <div className="content has-text-centered title is-1">
@@ -56,16 +53,23 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
+        <div className="columns">
+          <div className="card-content">
+            <p className="card-header-title title is-5">Atendimentos na semana:</p>
+            <AppointmentsPerDay/>
+          </div>
+        </div>
 
-        <div className="column is-8">
-          <div className="card is-fullwidth">
+        <div className="columns">
+          <div className="column">
             <div className="card-content">
-              <p className="card-header-title title is-5">Atendimentos na semana:</p>
-              <AppointmentsPerDay/>
+              <p className="card-header-title title is-5">Atendimentos por funcionário:</p>
+              <AppointmentsByPerson/>
             </div>
           </div>
         </div>
       </div>
+
     );
   }
 }
