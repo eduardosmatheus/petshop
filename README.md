@@ -1,16 +1,16 @@
-#Petshop (NOT FINISHED YET)
+#Petshop (*needs some improvements and refactoring*)
 
-A RESTful API to communicate with a petshop's client
+A petshop's management system **for academic purposes**.
 
 #Motivation
 
-Academic work where we have to create a solution for petshops that are saving their annotations in notes and cannot manage them well, so they can have better tracking of their processes and reports.
+We have to create a solution for establishments (especially petshops) that are saving their annotations in notes and cannot manage them well, so they can have better tracking of their processes and reports.
 
 #Stack
 
 - Java 8 (:heart:)
-- Jersey (An Java API to create RESTful WebServices)
-- React.js (A JavaScript library to build user interfaces)
+- [Jersey (An Java API to create RESTful WebServices)](https://jersey.java.net/)
+- [React.js (A JavaScript library to build user interfaces)](https://facebook.github.io/react/)
 
 #Instructions
 
@@ -19,14 +19,9 @@ Academic work where we have to create a solution for petshops that are saving th
 ```bash
    mvn install
    npm install
-   npm run build:prod
+   npm start
 ```
 
-- Running tests
-
-```bash
-   mvn test
-```
 
 #Contributors
 
